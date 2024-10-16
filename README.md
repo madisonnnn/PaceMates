@@ -136,7 +136,7 @@ To support event organizers, the website will include an analytics dashboard tha
 
 * Rahmanan, Anna. “NYC Is the Most Expensive City to Get a Gym Membership in the U.S.” Time Out, 12 Sept. 2022, www.timeout.com/newyork/news/nyc-is-the-most-expensive-city-to-get-a-gym-membership-in-the-u-s-091222#google_vignette.
 
-* “Behind the Numbers: Gym Membership Prices on the Rise since COVID-19.” Woodify Blog, 27 Oct. 2022, blog.wodify.com/post/behind-the-numbers-gym-membership-prices-on-the-rise-since-covid-19.
+* “Behind the Numbers: Gym Membership Prices on the Rise since COVID-19.” Woodify Blog, 27 Oct. 2022, [blog.wodify.com/post/behind-the-numbers-gym-membership-prices-on-the-rise-since-covid-19](http://blog.wodify.com/post/behind-the-numbers-gym-membership-prices-on-the-rise-since-covid-19).
 
 *  “Adult Obesity Prevalence Maps.” Centers for Disease Control and Prevention, 12 Sept. 2024, www.cdc.gov/obesity/php/data-research/adult-obesity-prevalence-maps.html#cdc_data_surveillance_section_4-across-states-and-territories.
 
@@ -144,5 +144,5 @@ To support event organizers, the website will include an analytics dashboard tha
 
 *  Laddu, Deepika R, et al. “The Impact of the COVID-19 Pandemic on Cardiovascular Health Behaviors and Risk Factors: A New Troubling Normal That May Be Here to Stay.” PMC PubMed Central, U.S. National Library of Medicine, 1 Jan. 2023, www.ncbi.nlm.nih.gov/pmc/articles/PMC9722238/. ; Nour, Tahir Yousuf, and Kerim Hakan Altintaş. “Effect of the COVID-19 Pandemic on Obesity and It Is Risk Factors: A Systematic Review.” PMC PubMed Central , U.S. National Library of Medicine, 30 May 2023, www.ncbi.nlm.nih.gov/pmc/articles/PMC10227822/.
 
-*  Rizzo, Nicholas. “Running Boom: 28.76% of Runners Started during the Pandemic.” RunRepeat, 8 Nov. 2023, runrepeat.com/new-pandemic-runners.
+*  Rizzo, Nicholas. “Running Boom: 28.76% of Runners Started during the Pandemic.” RunRepeat, 8 Nov. 2023, [runrepeat.com/new-pandemic-runners](http://runrepeat.com/new-pandemic-runners).
 
