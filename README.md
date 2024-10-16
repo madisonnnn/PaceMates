@@ -1,626 +1,148 @@
-# A React+Express with Auth Template
-
-This repo can be used to start a React+Express project fully equipped with Auth for user creation and login.
-
-**Table of Contents**
-
-- [Getting Started](#getting-started)
-  - [Create your repo](#create-your-repo)
-  - [Getting to know the folder structure](#getting-to-know-the-folder-structure)
-  - [Configure your environment variables](#configure-your-environment-variables)
-  - [Kickstart the project](#kickstart-the-project)
-  - [You're all set up now. Have Fun!](#youre-all-set-up-now-have-fun)
-- [Database](#database)
-  - [Migrations](#migrations)
-    - [Modifying / Adding New Migrations](#modifying--adding-new-migrations)
-  - [Seeds](#seeds)
-- [The Server Application](#the-server-application)
-  - [Interactions between components](#interactions-between-components)
-  - [User Model](#user-model)
-    - [`User.create()` vs. the `User` constructor](#usercreate-vs-the-user-constructor)
-    - [Validating Hashed Passwords](#validating-hashed-passwords)
-  - [Controllers and API endpoints](#controllers-and-api-endpoints)
-  - [The Login Flow](#the-login-flow)
-  - [Middleware](#middleware)
-- [Authentication \& Authorization](#authentication--authorization)
-  - [Cookies](#cookies)
-  - [Handle Cookie Sessions](#handle-cookie-sessions)
-  - [Check Authentication Middleware](#check-authentication-middleware)
-  - [Staying logged in with `GET /api/me`](#staying-logged-in-with-get-apime)
-- [Front-end](#front-end)
-  - [Frontend Utils](#frontend-utils)
-  - [Adapters](#adapters)
-  - [Example Page Component](#example-page-component)
-  - [Current User Context](#current-user-context)
-- [Deploying](#deploying)
-- [Advice](#advice)
-  - [Do not trust the front end](#do-not-trust-the-front-end)
-  - [Be wary of errors](#be-wary-of-errors)
+# PaceMates!
+Authors:
+* Madison Tolentino
+* Mei Zhu
 
-## Getting Started
+Team Name: PaceMates
 
-### Create your repo
+## 😕 The Problem 
+Health equity is the idea that everyone should have the same fair and just chance to achieve their best possible health, regardless of their circumstances. It’s achieved when health disparities are eliminated, and everyone has access to quality health care and wellness opportunities. Unfortunately, the COVID-19 pandemic has disproportionately impacted individuals with social anxiety or those struggling to leave their homes, further exacerbating mental health issues and limiting access to fitness and wellness opportunities.
 
-- First, make sure that you have a new GitHub Organization for your project.
-- Select <kbd>Use this template</kbd> and select <kbd>Create a new repository</kbd>. Rename the repo and choose your GitHub organization as the owner. 
-- Clone your repo.
+Many people are finding it challenging to reintegrate into public life due to lingering anxiety, isolation, and a loss of social skills. This marginalized group faces significant barriers—not just in terms of physical fitness, but also in mental health, social engagement, and professional opportunities. Post-COVID, these individuals are not only more vulnerable to job market disadvantages but also experience compounded health risks due to reduced physical activity and prolonged isolation.
 
-### Getting to know the folder structure
+This project aims to bridge the gap by creating a wellness website specifically designed for individuals struggling with social anxiety and those hesitant to leave their homes post-COVID. By focusing on mental health and social skill development, PaceMates will provide accessible resources to help users gradually overcome anxiety while staying physically active. Through guided running events, mental health support, and opportunities for community building in a safe and controlled way, the website fosters an inclusive environment for those left behind in traditional fitness models.
 
-In the root of this repository are the two directories you will be building the application in:
-
-- `frontend/` - the front-end application code (React)
-- `server/` - the back-end server application code
-
-Each of these sub-directories has its own `package.json` file with its own dependencies and scripts.
+By addressing this issue, we can provide an affordable alternative that encourages individuals to stay active and build a supportive community around running. This initiative specifically targets the needs of a marginalized group, helping them regain control of their mental and physical well-being. In doing so, we aim to offer a holistic solution that promotes mental health, reduces health disparities, and strengthens social skills for those impacted by the COVID-19 lockdowns.
 
-The root of the project also has a `package.json` file for quickly building/running the full project.
+---
 
-### Configure your environment variables
+## ☁️ Summary
+The COVID-19 pandemic has significantly impacted the mental and physical health of New Yorkers, particularly among those dealing with social anxiety, depression, and other mental health challenges. The rising costs of gym memberships have made indoor fitness options unaffordable for many, leaving individuals without access to supportive environments that promote both physical activity and mental well-being. As a result, there is a need for community-based alternatives that cater specifically to these individuals, such as running.
 
-Before you can actually start building, you need to create a database and configure your server to connect with it.
+**The Need for Community After COVID-19**
 
-- Create a database with a name of your choice
-- In the `server/` folder, copy the `.env.template` and name it `.env`.
-  - Update the `.env` variables to match your Postgres database information (username, password, database name)
-  - Replace the `SESSION_SECRET` value with your own random string. This is used to encrypt the cookie's `userId` value.
-- Your `.env` file should look something like this:
+The COVID-19 pandemic disrupted social connections, significantly heightening the need for community-driven activities to support physical and mental well-being. Feelings of isolation and anxiety have intensified, making it increasingly difficult for individuals to engage in physical activity. The lack of social connections can exacerbate mental health issues, leading to a cycle of inactivity that adversely affects overall well-being. Studies have shown that participation in group fitness or community events can significantly reduce feelings of isolation, anxiety, and depression. Therefore, community-driven activities that emphasize social engagement are crucial in mitigating these feelings and fostering meaningful connections.
 
-```sh
-# Replace these variables with your Postgres server information
-# These values are used by knexfile.js to connect to your postgres server
-PG_HOST='127.0.0.1'
-PG_PORT=5432
-PG_USER='itsamemario'
-PG_PASS='12345'
-PG_DB='my_react_express_auth_database'
+**Breaking Down Cost Barriers**
 
-# Replace session secret with your own random string!
-# This is used by handleCookieSessions to encrypt your 
-SESSION_SECRET='db8c3cffebb2159b46ee38ded600f437ee080f8605510ee360758f6976866e00d603d9b3399341b0cd37dfb8e599fff3'
-PG_CONNECTION_STRING=''
-```
+Cost remains a significant barrier to fitness, particularly for individuals with limited financial resources. Research from the National Library of Medicine indicates that individuals with low socioeconomic status perceive more barriers to physical activity compared to those with higher status, with financial constraints being a key factor. New York City has some of the highest gym membership costs in the country, averaging over $106 per month—$61.68 higher than the national average.  Post-pandemic, gym membership prices have notably increased, rising from $112 in January 2019 to $128 by August 2022, marking a 14.33% increase. Initially, during the pandemic, prices dropped to nearly $100 per month, but they rebounded to pre-pandemic levels of around $112 by mid-2021 and have continued to rise since then. 
 
-### Kickstart the project
+These rising costs make regular exercise unaffordable for many, creating barriers for residents seeking access to fitness facilities and hindering efforts to maintain a healthy lifestyle in a city already facing a high cost of living. In contrast, running offers a free and flexible alternative, helping individuals overcome financial constraints while providing an accessible way to stay active and connected with others.
 
-With everything configured, you can now install dependencies in the `frontend` folder (React, etc...) and in the `server` folder (express, Knex, etc...) and run the provided migrations and seeds. Rather than doing this manually, we made some scripts to help you:
-- In the root of your project (outside of the `server` and `frontend` folder), run the command `npm run kickstart`. This will build frontend static assets and run migration and seeds on the backend
+**Rising Obesity Rates in the Aftermath of COVID-19**
 
-Open up your database viewer (like TablePlus) and you should see that the migrations created a `users` table and the seeds populated it with three users!
-* Check out the `server/db/seeds/init.js` file to see the users created
+Obesity rates in the U.S. have been escalating, with the CDC reporting that over 20% of American adults are classified as obese—a condition exacerbated by the COVID-19 pandemic, which led to reduced activity levels and increased stress-related eating. In New York, the situation is even more pronounced, with obesity rates ranging from 25% to 30%. Approximately two out of every three adult New Yorkers fall into either the obese (29.1%) or overweight (34.5%) Body Mass Index (BMI) categories, affecting over 8.4 million adults statewide. Research indicates that sedentary lifestyles, poor eating habits, and heightened levels of stress, depression, and anxiety were intensified during the pandemic, contributing to significant weight gain and health-related issues, including heart disease and diabetes.
 
-During development, you can use the following commands from the root of the project
-- To start the server with the built static assets, run `npm start`
-- Open a new terminal and run `npm run dev:frontend` to run the frontend development server
-- Run `npm run build:frontend` to update the static assets in the frontend.
+**The Rise of Running: A Solution for Mental Health and Community Building**
 
+Running has emerged as a leading fitness trend during and after the pandemic, offering an accessible and cost-effective alternative to traditional gym memberships. Many individuals have turned to running not only for physical health but also for mental clarity and emotional relief. Studies show that group fitness activities can significantly reduce feelings of isolation and depression, making community running events an ideal solution for those seeking support.
 
-### You're all set up now. Have Fun!
+However, new runners, especially those who developed social anxieties during the pandemic, may hesitate to participate in organized activities. Our running events aim to create a welcoming environment that encourages in-person participation, helping individuals overcome their apprehensions. By fostering a sense of belonging, these events provide opportunities for social interaction and community building, enhancing both the enjoyment of running and commitment to maintaining physical health.
 
-Below, you will find more information about this repository and how to work with it. Enjoy!
+Fitness Trends 2021 revealed that outdoor activities like running ranked as the top trend in 2020 and 2021, indicating a notable surge during the pandemic. New-pandemic runners are 19.82% less likely to participate in in-person races over the next 12 months and show a 115.37% preference for virtual races compared to pre-pandemic runners. Motivations for running have also shifted, with physical health being the primary focus for 72% of new runners, an increase of 18.03% from before the pandemic.
 
-## Database
+Community running events can greatly benefit these new-pandemic runners by providing a supportive environment that encourages participation. These events not only help individuals overcome hesitations but also enhance the enjoyment of running and promote a commitment to physical health. Running offers a free, flexible alternative to costly gym memberships while promoting outdoor exercise, which research shows is beneficial for both mental and physical well-being.
 
-For this project, you should use a Postgres database. Make sure to set the environment variables for connecting to this database in the `.env` file. These values are loaded into the `knexfile.js` file using the `dotenv` package and the line of code:
+---
 
-```js
-require('dotenv').config(); // load the .env file
-```
+## ☝️ Our Hypothesis
+If a running community website effectively highlights pre-planned running events in local areas, then individuals are more likely to attend these events, leading to increased community engagement and improved physical and mental health outcomes. 
 
-### Migrations
+---
 
-> For an overview of migrations and seeds, [check out these notes](https://github.com/The-Marcy-Lab-School/8-3-2-migrations-seeds).
+## 🏃‍➡️ Product Overview
+PaceMates will act as a holistic platform focused on promoting running as an accessible, community-oriented fitness option. By targeting the growing concerns of social isolation, anxiety, and depression in New York City, this initiative aims to create a supportive environment that encourages physical activity while enhancing mental well-being and fostering social connections.
 
-Migration files are stored in the `server/db/migrations` folder (this location is defined in the `knexfile.js` and can be changed if you so choose)
+The website will feature a centralized event discovery system with a user-friendly interface, allowing individuals to easily find local running events tailored to their specific preferences. By offering filters such as pace, demographics, distance from the event, and location, users can identify events that align with their personal fitness goals and interests. This functionality will empower users to connect with others who share similar objectives, fostering a sense of belonging and community within their local areas.
 
-In `server/db/migrations`, you can see the migration files that generate the `users` table. The first one sets up some initial columns:
+In addition to discovering events, the platform will allow users to generate and promote their own running events, creating a dynamic space for community engagement. By organizing group runs, themed events, or even charity races, individuals can take an active role in building their fitness networks. This user-generated feature encourages more social interactions and increases participation in physical activities, helping cultivate a supportive environment where members motivate each other to stay active and healthy.
 
-```js
-exports.up = (knex) => {
-  return knex.schema.createTable('users', (table) => {
-    table.increments();
-    table.string('username').notNullable().unique();
-    table.string('password_hash').notNullable();
-  })
-};
-exports.down = (knex) => knex.schema.dropTable('users');
-```
+---
 
-This migration file will create a `users` table with an auto-generated and auto-incrementing `id` column, as well as `username` and `password_hash` columns.
+## 🫶  Mission Statement 
+Given these challenges, there is an urgent need for affordable fitness options in New York City that prioritize mental health and well-being. Running provides a cost-effective, community-oriented solution that can help individuals combat social anxiety and depression while fostering a sense of belonging. By developing a platform that facilitates running events and encourages social connections, we can address the barriers to accessible fitness and promote healthier, more fulfilling lifestyles for NYC residents.
 
-#### Modifying / Adding New Migrations
+---
 
-As you build your project, you will likely want to modify your tables. If this is the case, AVOID using the `migration:rollback`. Instead, *create a new migration that modifies the table*.
+## 🫂 Who do we serve?
+**Individuals with Social Anxiety**
 
-For example, the second migration file adds some timestamp columns to the existing `users` table.
+Many people struggle with social anxiety, especially those who have become more isolated since the pandemic. Our application will create a supportive space where these individuals can gradually reintegrate into social activities through running. This form of exercise not only promotes physical health but also provides mental health benefits, allowing users to feel more comfortable and confident in social settings.
 
-```js
-exports.up = (knex) => {
-  return knex.schema.alterTable('users', (table) => {
-    // creates two columns: created_at and updated_at
-    table.timestamps(true, true);
-  })
-};
+**Individuals Seeking Mental Health Support**
 
-exports.down = (knex) => {
-  return knex.schema.alterTable('users', (table) => {
-    table.dropColumn('created_at');
-    table.dropColumn('updated_at');
-  })
-};
-```
+Those experiencing depression or low self-esteem can greatly benefit from the positive effects of physical activity and social interaction. Our platform aims to do more than just promote physical fitness; it will also offer valuable resources and community support focused on enhancing mental well-being. By encouraging users to engage in running and connect with others, we can help them improve their overall mental health.
 
-Note that instead of using `knex.schema.createTable`, we are using `.alterTable` since the table already exists. We also use `.alterTable` in the `.down` function to drop the two columns created by `table.timestamps` if we ever did want to roll back these changes.
+**Low-Income Residents**
 
-- For more information, look into the [Knex documentation](https://knexjs.org/guide/schema-builder.html)
+With the rising costs of gym memberships in New York City, our application will serve as an accessible and affordable fitness option for low-income residents. By eliminating financial barriers, we provide free access to community running events and resources. This initiative aims to create equal opportunities for everyone to participate in fitness activities, regardless of their economic circumstances.
 
-### Seeds
+---
 
-Seed files are stored in the `server/db/seeds` folder.
+## 🧳 User Journey Map
+![User Journey Chart](./images/UserJourneyChart.jpg)
+User Journey Chart
 
-The provided `init.js` seed file uses the `User.create` model method to generate the following data:
+## 👭 User-stories
+**Individual Experiencing Anxiety**
 
-![](./documentation/readme-img/users-tableplus.png)
+As a [], I want to [], so that I [].
 
-Notice how the passwords have been hashed! This is because the `User.create` method uses the bcrypt hashing functions in the `server/utils/authUtils` file. If you didn't want to use the `User` model to create these resources, you could hash the passwords manually and then insert the data into the database like so:
+---
 
-```js
-// don't forget to import the auth utils so you can hash your own passwords
-const authUtils = require('../../utils/auth-utils');
+## 🤸 Key Technical Challenges
+**Integration with Google Maps**
 
-exports.seed = async (knex) => {
-  // Before you have models you can always just do `await knex('table_name').del`
-  await knex('users').del();
+One of the key challenges we anticipate is the integration of Google Maps to display real-time location data on our home page, highlighting the starting points of all running events. This will involve utilizing the Google Maps API to dynamically fetch and display event locations while ensuring smooth performance as users interact with the map. Additionally, each event page will feature a map that shows both the start and end points of the run. Managing API calls, handling multiple location datasets, and optimizing the user experience for seamless interaction will be crucial to the success of this feature.
 
-  await knex.raw('ALTER SEQUENCE users_id_seq RESTART WITH 1');
+**Customizable Event Filters**
 
-  const andyPassword = authUtils.hashPassword('andy')
-  const bobPassword = authUtils.hashPassword('bob')
-  const candicePassword = authUtils.hashPassword('candice')
+Another significant challenge involves enabling users to filter events based on various criteria such as location, date, distance, and difficulty in real-time. The complexity arises from the multiple approaches available for filtering, searching, and sorting the information, as each method can impact performance differently. Developing an efficient search and filter system will require querying the database and dynamically updating results to enhance user experience.
 
-  await knex('users').insert([
-    { username: 'andy', password: andyPassword },
-    { username: 'bob', password: bobPassword },
-    { username: 'candice', password: candicePassword }
-  ])
-};
-```
+---
 
-## The Server Application
+## 🏅 Extension Opportunities 
+**Social Networking Feature**
 
-The server is responsible for serving static assets as well as receiving and parsing client requests, getting data from the database, and sending responses back to the client. 
+The website will include social networking capabilities such as friend requests, commenting, and the ability to indicate attendance at a run. These features will enable users to build relationships, share experiences, and form running groups. By fostering a sense of belonging and accountability, users will be more likely to participate in events and maintain their fitness routines.
 
-The server is organized into a few key components (from right to left in the diagram below):
-* The "Models" found in `server/models/` — responsible for interacting directly with and returning data from the database. In this application, the models will use `knex` to do this.
-* The "Controllers" found in `server/controllers/` — responsible for parsing incoming requests, performing necessary server-side logic (like interacting with models), and sending responses.
-* The "App" found in `server/index.js` — the hub of the server application, created by Express, that is responsible for defining the endpoint URLs that will be available in the application, and assigning controllers to handle each endpoint. It also configures middleware.
+**Language Inclusivity and Accessibility**
 
-![](./documentation/readme-img/full-stack-diagram.svg)
+Prioritizing accessibility, the website will provide resources in multiple languages and offer free events. This commitment will make it easier for individuals from diverse backgrounds and socioeconomic statuses to engage in running and reap the associated health and social benefits.
 
-### Interactions between components
+**Push Notifications for Event Reminders**
 
-Each one of these components handles a specific task and **together they form a pipeline where each component takes in inputs and produces outputs**. 
+To enhance user engagement, the website will implement push notifications that allow users to receive timely reminders about upcoming events via text, email, or calendar invites. These notifications will ensure that participants never miss important updates, thereby improving attendance rates and fostering a sense of community. Additionally, timely reminders will help users better prepare for events, leading to a more organized and enjoyable experience.
 
-As you build your application, seek to understand how these components interact and what each component needs from the others:
-* If a user wants to create a new user, they send a `POST` request with a username and password to a particular endpoint defined by the `app`
-* The `app` assigns a specific controller to handle this request
-* The controller parses the username and password from the request and passes them along to the `User` model.
-* The `User` model takes the username and password and executes an `INSERT` SQL statement and returns newly created `user` object back to the controller
-* The controller takes the `user` object and sends it back to the client.
-* The client now knows that the user was created successfully.
+**Integration with Local Organizations**
 
-### User Model
+The website will collaborate with local community organizations, schools, and health services to promote events and provide additional resources. By hosting workshops, clinics, and incentive programs, the platform will help users gain valuable knowledge about fitness and nutrition while encouraging participation in running activities.
 
-As mentioned above, a model is the right-most component of a server application. An application can have many models and each model is responsible for managing interactions with a particular table in a database.
+**Gamification and Integration with Fitness Tracking Apps** 
 
-![](./documentation/readme-img/full-stack-diagram.svg)
+The website will introduce a gamification feature that tracks users' participation streaks, allowing them to see how many consecutive days they have attended a run or set weekly goals to monitor their achievements. This feature can motivate users to stay active and engaged with running events. By visualizing their progress, users may feel more compelled to maintain their streak or reach their set goals, fostering a sense of accomplishment and encouraging regular participation. Additionally, it can create friendly competition among users, enhancing community engagement.
 
-The `User` model (defined in `server/db/models/User.js`) provides static methods for performing CRUD operations with the `users` table in the database:
-* `User.list()`
-* `User.find(id)`
-* `User.findByUsername(username)`
-* `User.create(username, password)`
-* `User.update(id, username)`
-* `User.deleteAll()`
+**Analytics Dashboard for Event Organizers**
 
-The controllers that use these methods can import the entire `User` class and then invoke the function that they need.
+To support event organizers, the website will include an analytics dashboard that enables them to view crucial statistics such as registration numbers and attendee demographics. By providing organizers with insights into participant behavior and event performance, this feature will help them make informed decisions about future events, marketing strategies, and community engagement efforts. Understanding attendee demographics will also aid in tailoring events to better meet the needs of diverse groups. 
 
+---
 
-#### `User.create()` vs. the `User` constructor
+## 📒 Sources
 
-Note that there is both a `User.create()` method AND a `constructor()`. There is also an *instance* method `isValidPassword()`.
+* Stevens, Mark, et al. “Better Together: How Group-Based Physical Activity Protects against Depression.” Social Science & Medicine Volume 286, Science Direct, 21 Aug. 2021, www.sciencedirect.com/science/article/pii/S0277953621006699.
 
-Let's look at how these three functions are related.
+* Pedersen, Marlene Rosager Lund, et al. “Motives and Barriers Related to Physical Activity and Sport across Social Backgrounds: Implications for Health Promotion.” PMC PubMed Central, U.S. National Library of Medicine, 28 May 2021, www.ncbi.nlm.nih.gov/pmc/articles/PMC8198157/.
 
-First, the `User` model provides the `User.create` method for creating a new user in the database.
+* Rahmanan, Anna. “NYC Is the Most Expensive City to Get a Gym Membership in the U.S.” Time Out, 12 Sept. 2022, www.timeout.com/newyork/news/nyc-is-the-most-expensive-city-to-get-a-gym-membership-in-the-u-s-091222#google_vignette.
 
-```js
-static async create(username, password) {
-  // hash the plain-text password using bcrypt before storing it in the database
-  const passwordHash = await authUtils.hashPassword(password);
+* “Behind the Numbers: Gym Membership Prices on the Rise since COVID-19.” Woodify Blog, 27 Oct. 2022, blog.wodify.com/post/behind-the-numbers-gym-membership-prices-on-the-rise-since-covid-19.
 
-  const query = `INSERT INTO users (username, password_hash)
-    VALUES (?, ?) RETURNING *`;
-  const result = await knex.raw(query, [username, passwordHash]);
-  
-  // get the first returned row and convert it to a User instance
-  // to make the hashed password private
-  const rawUserData = result.rows[0];
-  return new User(rawUserData);
-}
-```
+*  “Adult Obesity Prevalence Maps.” Centers for Disease Control and Prevention, 12 Sept. 2024, www.cdc.gov/obesity/php/data-research/adult-obesity-prevalence-maps.html#cdc_data_surveillance_section_4-across-states-and-territories.
 
-When we want to create a new user, we take the provided password and has it using `authUtils.hashPassword()` (which uses `bcrypt` under the hood). Then, we can execute an `INSERT` SQL statement to store the provided username and this hashed password in the database.
+*  “New York State Department of Health Report Finds Health Equity Linked to Burden of Obesity.” New York State Department of Health, 20 June 2023, www.health.ny.gov/press/releases/2023/2023-06-20_obesity.htm.
 
-> Read about [dynamic queries with `knex.raw()` here](https://github.com/The-Marcy-Lab-School/8-2-2-knex?tab=readme-ov-file#dynamic-queries)
+*  Laddu, Deepika R, et al. “The Impact of the COVID-19 Pandemic on Cardiovascular Health Behaviors and Risk Factors: A New Troubling Normal That May Be Here to Stay.” PMC PubMed Central, U.S. National Library of Medicine, 1 Jan. 2023, www.ncbi.nlm.nih.gov/pmc/articles/PMC9722238/. ; Nour, Tahir Yousuf, and Kerim Hakan Altintaş. “Effect of the COVID-19 Pandemic on Obesity and It Is Risk Factors: A Systematic Review.” PMC PubMed Central , U.S. National Library of Medicine, 30 May 2023, www.ncbi.nlm.nih.gov/pmc/articles/PMC10227822/.
 
-Notice that when we get the data back from the database, we don't return the `rawUserData`. **We use the `new User()` constructor function** to create a `User` instance using that `rawUserData` and we return that instance. In fact, all of the class methods do this before returning.
-
-Why?
-
-#### Validating Hashed Passwords
-
-Whenever we receive data from the database about a user, it will include the hashed password. We need to send that user's data to the frontend, but we don't want to include the password, even if it is hashed.
-
-Using the `constructor` is a clever trick of sorts that takes advantage of the **private instance property** feature of classes. Here is how:
-* By wrapping the `rawUserData` data from the database in a `new User()` instance, we can make a private `#passwordHash` property.
-* The `#passwordHash` property can't be accessed except by the instance itself.
-* If our controller needs to verify the password for a given `User` instance, it can do so using the instance method `isValidPassword` which DOES have access to the private `#passwordHash` property. 
-* `isValidPassword` uses the `authUtils.isValidPassword` helper function (which uses `bcrypt.compare()`) to verify provided password against the stored `#passwordHash`
-
-```js
-class User {
-  // the constructor is used to hide the passwordHash and
-  // create an object that can be safely sent to the client
-  constructor({ id, username, password_hash }) {
-    this.id = id;
-    this.username = username;
-    this.#passwordHash = password_hash;
-  }
-
-  // this instance method can access the private passwordHash
-  isValidPassword = async (password) => (
-    authUtils.isValidPassword(password, this.#passwordHash)
-  );
-
-  //... other methods...
-}
-```
-
-### Controllers and API endpoints
-
-The controllers that interact with the `User` model are divided into two files: `userControllers` and `authControllers`. These controller files each export a controller function that are assigned to a particular API endpoint the `app`.
-
-In all, the following API endpoints are provided: 
-
-**User Routes**:
-
-| Method | Path           | Controller                   | Model Method    | Description                                  |
-| ------ | -------------- | ---------------------------- | --------------- | -------------------------------------------- |
-| GET    | /api/users     | `userControllers.listUsers ` | `User.list()`   | Get the list of all users                    |
-| GET    | /api/users/:id | `userControllers.showUser  ` | `User.find()`   | Get a specific user by id                    |
-| POST   | /api/users     | `userControllers.createUser` | `User.create()` | Create a new user and set the cookie userId  |
-| PATCH  | /api/users/:id | `userControllers.updateUser` | `User.update()` | Update the username of a specific user by id |
-
-**Authentication Routes**:
-
-| Method | Path        | Controller                   | Model Method            | Description                                            |
-| ------ | ----------- | ---------------------------- | ----------------------- | ------------------------------------------------------ |
-| GET    | /api/me     | `authControllers.showMe`     | `User.find()`           | Get the current logged in user based on the cookie     |
-| POST   | /api/login  | `authControllers.loginUser`  | `User.findByUsername()` | Log in to an existing user and set cookie userId value |
-| DELETE | /api/logout | `authControllers.logoutUser` | None                    | Log the current user out (delete the cookie)           |
-
-### The Login Flow
-
-So, how are these methods used? Let's look at the login flow. Below is the `loginUser` controller which is executed for the endpoint `POST /api/login`:
-
-
-```js
-exports.loginUser = async (req, res) => {
-  const { username, password } = req.body
-
-  // Get a User instance (we can see the username and id but can't see the password)
-  const user = await User.findByUsername(username);
-  if (!user) return res.sendStatus(404);
-
-  // Use the instance method isValidPassword to verify the password
-  const isPasswordValid = await user.isValidPassword(password); // <---
-  if (!isPasswordValid) return res.sendStatus(401);
-
-  req.session.userId = user.id; // <-- more on this in a moment...
-  res.send(user);
-};
-```
-
-* First, the `User.findByUsername` function searches for a user in the database with the provided `username`
-* The value returned will be a `User` instance (or `null` if not found)
-* Next, the provided `password` needs to be verified to see if it matches the password in the database. We can't look at `user.passwordHash` since it is private, but we CAN use the `user.isValidPassword` to verify for us.
-* If both the user is found and the password matches, we send the user data to the frontend.
-
-### Middleware
-
-In `server/index.js`, various pieces of middleware are used. These pieces of middleware are either provided by `express` or are custom-made and found in the `server/middleware/` folder
-
-```js
-app.use(handleCookieSessions); // adds a session property to each request representing the cookie
-app.use(logRoutes); // print information about each incoming request
-app.use(express.json()); // parse incoming request bodies as JSON
-app.use(express.static(path.join(__dirname, '../frontend/dist'))); // Serve static assets from the dist folder of the frontend
-```
-
-## Authentication & Authorization
-
-- **authenticated** means "We have confirmed this person is a real user and is allowed to be here"
-  - For example, only logged in users can see the other users in this app
-
-- **authorized** means "This person is allowed to perform this protected action"
-  - For example, users are only authorized to edit their OWN profile (they can't change someone else's profile)
-
-To implement this functionality, we'll use cookies.
-
-### Cookies
-
-In the context of computing and the internet, a **cookie** is a small text file that is sent by a website to your web browser and stored on your computer or mobile device. Here is how they work:
-
-![](./documentation/readme-img/cookies.png)
-
-* When a client sends an initial request to the server, it doesn't have a cookie
-* The server sends a response along with a cookie.
-* The client can save that cookie and store it on the user's computer (many client-side applications will ask you if you want to save it or not)
-* On all future client requests to the server, the cookie will be sent with the request. Because the cookie is saved locally, even if the user closes the application and re-opens it later, the cookie will be sent along with all requests.
-
-For our purposes, our serve can make a cookie that saves the `id` of the user that is logged in. Whenever the user returns to the site, the cookie can immediately tell us who they are. This can be used to authenticate and to authorize the user.
-
-> WARNING: When the server creates a cookie for the client, it has to be careful with what data is stored in the cookie because the client can manipulate that data and create its own cookies. Always make sure that data stored in a cookie is encrypted!
-
-### Handle Cookie Sessions
-
-In our application, we are using `handleCookieSessions` middleware with our Express server to create cookies (and encrypt data stored on them) for us. We can access/manipulate those cookies by accessing the `req.session` object when handling incoming requests. 
-
-To achieve authentication/authorization, we will store the `userId` of the currently logged-in user in the `req.session` object. For example, this is the `loginUser` controller found in `controllers/authControllers`
-
-```js
-exports.loginUser = async (req, res) => {
-  const { username, password } = req.body // the req.body value is provided by the client
-
-  const user = await User.findByUsername(username);
-  if (!user) return res.sendStatus(404);
-
-  const isPasswordValid = await user.isValidPassword(password);
-  if (!isPasswordValid) return res.sendStatus(401);
-
-  req.session.userId = user.id; // here we add the userId to the cookie (req.session)
-  res.send(user);
-};
-```
-
-On future requests, if the `req.session.userId` value is missing, then there is not a currently logged in user. If there is a value, then there IS a logged in user.
-
-With this information we can:
-1. implement **authentication** (logging a user in / confirming that the user is already logged in).
-2. implement **authorization** (confirm that the person who is logged in can do what they have requested to do, such as edit their profile)
-
-For example, suppose that a user logs in and then wants to edit their profile. The use of cookie data could look like this:
-
-![](./documentation/readme-img/authorization-diagram.svg)
-
-### Check Authentication Middleware
-
-The `checkAuthentication` middleware verifies that the current user is logged in before processing a request. If there is no `userId` in `req.session`, any request that uses this middleware will be rejected with a 401 status code.
-
-```js
-// middleware/check-authentication.js
-const checkAuthentication = (req, res, next) => {
-  // req.session holds the cookie sent by the client (if it had one)
-  const { userId } = req.session; 
-  if (!userId) return res.sendStatus(401);
-  return next();
-};
-```
-
-For example, only logged-in users should be able to edit their own user profile.
-
-Here, we specify that the `checkAuthentication` middleware should be used for only this one route. 
-
-```js
-app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
-```
-
-### Staying logged in with `GET /api/me`
-
-Cookies are a great way to authorize a user. They can also be used to **authenticate** a user (check to see if they are logged in).
-
-When a user logs in and gets their cookie, that cookie is stored locally across sessions (when the user closes the browser tab and re-opens it).
-
-When the user returns to the site after logging in, they will have a cookie indicating their user id. The server can immediately send back the associated user and automatically log the client in.
-
-![](./documentation/readme-img/authentication-diagram.svg)
-
-## Front-end
-
-A server application can exist on its own but it becomes full-stack when paired with a front-end.
-
-The front-end is responsible for handling user interactions, sending requests to the server application, and rendering content provided by the server.
-
-While it is developed as a React application and `.jsx` files, it will ultimately be built into static assets (HTML, CSS, and JS files that can be sent directly to the browser).
-
-The frontend application is organized into a few key components (from right to left in the diagram below):
-* The "Adapters" found in `frontened/src/adapters/` — the front-end equivalent of controllers, responsible for structuring requests sent to the server and for parsing responses.
-* The "Pages" found in `frontend/src/pages/` — responsible for rendering separate pages of the front-end application. These components make use of sub-components defined in `frontend/src/components`
-* The "App" found in `frontend/src/App.jsx` — the hub of the frontend application, it is the root component that is responsible for defining frontend routes and establishing site-wide layout components (like the navigation bar)
-
-* The `frontend/main.jsx` file actually renders the `App` component and provides access to the `BrowserRouter` and the application's global Context.
-* The `index.html` file itself is the entry point of the entire application and it loads the `main.jsx` file and any additional scripts.
-
-
-![](./documentation/readme-img/front-end.svg)
-
-### Frontend Utils
-
-Let's again start at the right end of the diagram and talk about fetching. Provided in the `frontend/src/utils/fetchingUtils.js` file are a series of helper functions for formatting a fetch request.
-
-The `fetchHandler` function will actually send the `fetch` request, making sure that the response is valid and that the response is in JSON format before parsing. 
-
-If the front-end wants to make a `POST`/`PATCH`/`DELETE` request, an `options` object must be provided. Since these objects are mostly boilerplate, this `fetchingUtils` file also provides helpers for creating those `options` objects. All that you have to do is provide the `body` of the request:
-
-
-### Adapters
-
-An adapter is another layer of abstraction around the fetching process. Really, they are just helper functions for fetching from a specific server endpoint.
-
-Often, they will be short, like this from the `adapters/user-adapter.js` file:
-
-```js
-const baseUrl = '/api/users';
-
-export const getAllUsers = async () => {
-  const [users, error] = await fetchHandler(baseUrl);
-  if (error) console.log(error); // print the error for simplicity.
-  return users || [];
-};
-```
-* A `baseUrl` is defined for all adapters in this `user-adapter` file.
-* The `fetchHandler` will return a tuple with either the `users` data or the `error`.
-* Here, we print the `error` if it exists but in more robust applications, errors would be handled more gracefully, or they would potentially be returned.
-* If `users` exists, we'll return it, otherwise return an empty array (thus ignoring the `error`).
-
-While this code could easily be implemented within the `Users` page component that wants to perform this fetch, by separating this logic out, the `Users` page can be a little bit cleaner. This is immensely valuable as React components can easily become disorganized.
-
-Additionally, if multiple components make use of the same server endpoint, an adapter can be reused without re-writing the same logic.
-
-### Example Page Component
-
-Let's look at that `Users` page component! This page is responsible for fetching and displaying a list of all users in the database:
-
-```jsx
-import { useEffect, useState } from "react";
-import { getAllUsers } from "../adapters/user-adapter";
-import UserLink from "../components/UserLink";
-
-export default function UsersPage() {
-  const [users, setUsers] = useState([]);
-
-  // fetch all users to update the users state above
-  useEffect(() => {
-    // use the adapter which returns a promise
-    // we can avoid using async/await here with this nice one-liner
-    getAllUsers().then(setUsers);
-  }, []);
-
-  return <>
-    <h1>Users</h1>
-    <ul>
-      {
-        users.map((user) => <li key={user.id}><UserLink user={user} /></li>)
-      }
-    </ul>
-  </>;
-}
-```
-
-* The `useState` hook is created to manage the fetched `users`. On the first render, the `users` array will be empty. When the fetch is complete, `users` will hold the fetched users.
-* The `useEffect` hook initiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. Notice how we can avoid using the `async`/`await` syntax by using the `.then` syntax to handle the promise. Sometimes `.then` is better! 
-* When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
-* The `users` array is mapped to render a `UserLink` for each user. On the first render, nothing will appear. When the fetch is complete and the component re-renders, we will see all users.
-
-### Current User Context
-
-The frontend uses a `CurrentUserContext` to provide the entire application with the currently logged in user and a function to set the currently logged in user. 
-
-The first component to use this context is `App` which sets the current user after a successful `GET /api/me` request (the user had a cookie indicating they previously signed in). This is the first thing that happens whenever a user visits the web application.
-
-```js
-export default function App() {
-  const { setCurrentUser } = useContext(UserContext);
-  useEffect(() => {
-    checkForLoggedInUser().then(setCurrentUser);
-  }, [setCurrentUser]);
-
-  // ...
-}
-```
-
-Once the `currentUser` is set in context, it can be used by any page. 
-
-For example, the `pages/Login` page redirects users away from the page if the `currentUser` value is set (we don't want signed-in users to be able to view the login page). It uses the `currentUser.id` value to redirect the user to their specific profile page.
-
-```js
-const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-
-if (currentUser) return <Navigate to={`/users/${currentUser.id}`} />;
-```
-
-Below are the pages/components that use the context:
-* `components/SiteHeadingAndNav`
-  * if a user is logged in show a link to view their own profile and a link to see all users, otherwise show the login/sign up buttons in the nav
-* `pages/Login`
-  * if a user is already logged in, it navigates back to the home page.
-  * otherwise, this page can set the current user after a successful `POST /api/login` request
-* `pages/SignUp`
-  * if a user is already logged in, it navigates back to the home page.
-  * otherwise, this page can set the current user after a successful `POST /api/users` request
-* `pages/User`
-  * if the currently logged in user matches the current profile page, the user can edit the profile and log out
-  * if the user logs out, it sets the current logged in user to `null` before navigating back home.
-
-## Deploying
-
-We recommend deploying using Render.com. It offers free hosting of web servers and PostgreSQL databases with minimal limitations.
-
-Follow the steps below to create a PostgreSQL database hosted by Render and deploy a web application forked from this repository:
-
-1. Make an account on https://render.com/
-2. Create a PostgreSQL Server
-   - https://dashboard.render.com/ and click on <kbd>New +</kbd>
-   - Select PostgreSQL
-   - Fill out information for your DB
-     - **Region**: `US East (Ohio)`
-     - **Instance Type**: Free
-   - Select <kbd>Create Database</kbd>
-   - Keep the created database page open. You will need the `Internal Database URL` value from this page for step 4
-3. Deploy Your Express Server
-   - https://dashboard.render.com/ and click on <kbd>New +</kbd>
-   - Select <kbd>Web Service</kbd>
-   - Connect your GitHub account (if not connected already)
-   - Find your repository and select <kbd>Connect</kbd>
-   - Fill out the information for your Server
-     - **Name**: the name of your app
-     - **Region**: `US East (Ohio)` - the important thing is that it matches the PostgreSQL region
-     - **Branch**: `main`
-     - **Root Directory**: leave this blank
-     - **Runtime**: `Node`
-     - **Build Command**: `npm build`
-     - **Start Command**: `npm start`
-     - **Instance Type**: Free
-   - Select <kbd>Create Web Service</kbd> (Note: The first build will fail because you need to set up environment variables)
-4. Set up environment variables
-   - From the Web Service you just created, select <kbd>Environment</kbd> on the left side-menu
-   - Under Secret Files, select <kbd>Add Secret File</kbd>
-     - **Filename**: `.env`
-     - **Contents**:
-       - Look at your local `.env` file and copy over the `SESSION_SECRET` variable and value.
-       - Add a `PG_CONNECTION_STRING` variable. Its value should be the `Internal Database URL` value from your Postgres page (created in step 2)
-       - Add a `NODE_ENV` variable with the value `'production'`
-       - The contents should look like this:
-
-        ```env
-        SESSION_SECRET='AS12FD42FKJ42FIE3WOIWEUR1283'
-        PG_CONNECTION_STRING='postgresql://user:password@host/dbname'
-        NODE_ENV='production'
-        ```
-   - Click <kbd>Save Changes</kbd>
-
-5. Future changes to your code
-   - If you followed these steps, your Render server will automatically redeploy whenever the main branch is committed to. To update the deployed application, simply commit to main.
-   - For front-end changes, make sure to run `npm run build` to update the contents of the `public/` folder and push those changes.
-
-## Advice
-
-### Do not trust the front end
-
-Remember, **DO NOT TRUST THE FRONT-END**. Validate everything on the server. Just because you write logic to prevent a form from submitting on the front-end doesn't mean a nefarious actor couldn't just pop open a console and make a `fetch` request there. Also, the front-end can be buggy and mistakes can happen.
-
-### Be wary of errors
-
-Given time constraints, this project is handling barely any errors. The model is very brittle right now, the server and sql errors should be handled like we've done before. We're also only handling the most basic of flows and errors on the client. Things like handling attempted recreations of users who already exist or even wrong passwords can be handled much more delicately.
+*  Rizzo, Nicholas. “Running Boom: 28.76% of Runners Started during the Pandemic.” RunRepeat, 8 Nov. 2023, runrepeat.com/new-pandemic-runners.
 
