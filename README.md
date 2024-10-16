@@ -84,9 +84,55 @@ With the rising costs of gym memberships in New York City, our application will 
 User Journey Chart
 
 ## 👭 User-stories
-**Individual Experiencing Anxiety**
+**MVP Stories**
+**User**
 
-As a [], I want to [], so that I [].
+As a user, I want to sign up/log in, so that I can join the community and create/attend events.
+
+As a user, I want to change my password, so that I can access my account and events.
+
+As a user, I want to be able to contact the development team, so that I can notify them of any bugs or fixes required.
+
+As a user, I want to update my profile page, so that my information is up-to-date.
+
+As a user, I want to learn more about the website, so that I can see if the website is the right fit for me.
+
+As a user, I want to create a profile page, so that I can share personal information to connect with others.
+
+**Event Host**
+
+As an event host, I want to create events, so that I can host events to my preferences.
+
+As an event host, I want to see my created events, so that I can take note of the date and see all attendees.
+
+**Event Attendee**
+
+As an event attendee, I want to browse and filter events, so that I can decide if an event is right for me.
+
+As an event attendee, I want to see the other attendees' profile page, so that I can familiarize myself and connect before the event.
+
+As an event attendee, I want to see my past events, so that I can remember the hose and join future events created by them.
+
+As an event attendee, I want to see my upcoming events, so that I can remember to attend.
+
+**Stretch Stories**
+**User**
+
+As a user, I want to network with other users through online interaction, so that I can further develop relationships through the website.
+
+As a user, I want to switch my language, so that I can access the website in my preferred language.
+
+As a user, I want to receive notifications, so that I can get reminders for my events.
+
+**Event Host**
+
+As an event host, I want to access the analytics dashboard, so that I can view crucial statistics such as registration numbers and attendee demographics.
+
+**Event Attendee**
+
+As an event attendee, I want to access events collaborating with local organizations, so that I can gain valuable knowledge about fitness and nutrition while participating in running activities.
+
+As an event attendee, I want to track my participation streak, so that I can see how many consecutive days I have attended a run and set weekly goals to monitor my achievements.
 
 ---
 
