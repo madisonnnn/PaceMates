@@ -1,5 +1,5 @@
 {
-  "name": "react-express-auth-template",
+  "name": "pacemates",
   "version": "1.0.0",
   "description": "",
   "main": "server/index.js",
@@ -11,10 +11,15 @@
     "start": "cd server && npm start",
     "dev": "cd server && npm run dev",
     "dev:frontend": "cd frontend && npm run dev",
-    "connect": "psql -U postgres -d react_auth_example",
-    "lint": "eslint . --fix"
+    "connect": "psql -U postgres -d pacemates",
+    "lint": "eslint . --fix",
+    "migrate:make": "cd server && npx knex migrate:make"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "knex": "^3.1.0"
+  }
 }

@@ -9,9 +9,11 @@ class User {
   // static methods to hide the hashed password of users before sending user data 
   // to the client. Since we want to keep the #passwordHash property private, we 
   // provide the isValidPassword instance method as a way to indirectly access it.
-  constructor({ id, username, password_hash }) {
+  constructor({ id, firstName,lastName,email, password_hash }) {
     this.id = id;
-    this.username = username;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email
     this.#passwordHash = password_hash;
   }
 
@@ -43,9 +45,9 @@ class User {
 
 
   // Same as above but uses the username to find the user
-  static async findByUsername(username) {
-    const query = `SELECT * FROM users WHERE username = ?`;
-    const result = await knex.raw(query, [username]);
+  static async findByName(firstName,lastName) {
+    const query = `SELECT * FROM users WHERE first_name = ? OR last_name = ?`;
+    const result = await knex.raw(query, [firstName, lastName]);
     const rawUserData = result.rows[0];
     return rawUserData ? new User(rawUserData) : null;
   }
@@ -53,27 +55,29 @@ class User {
   // Hashes the given password and then creates a new user
   // in the users table. Returns the newly created user, using
   // the constructor to hide the passwordHash. 
-  static async create(username, password) {
+  static async create(firstName,lastName,email, password) {
     // hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await authUtils.hashPassword(password);
 
-    const query = `INSERT INTO users (username, password_hash)
-      VALUES (?, ?) RETURNING *`;
-    const result = await knex.raw(query, [username, passwordHash]);
+    const query = `INSERT INTO users (first_name, last_name, email, password_hash)
+      VALUES (?, ?, ?, ?) RETURNING *`;
+    const result = await knex.raw(query, [firstName, lastName, email, passwordHash]);
     const rawUserData = result.rows[0];
     return new User(rawUserData);
   }
 
   // Updates the user that matches the given id with a new username.
   // Returns the modified user, using the constructor to hide the passwordHash. 
-  static async update(id, username) {
+  static async update(id, firstName, lastName, email) {
     const query = `
       UPDATE users
-      SET username=?
+      SET first_name=?
+      SET last_name=?
+      SET email=?
       WHERE id=?
       RETURNING *
     `
-    const result = await knex.raw(query, [username, id])
+    const result = await knex.raw(query, [firstName, lastName,email, id])
     const rawUpdatedUser = result.rows[0];
     return rawUpdatedUser ? new User(rawUpdatedUser) : null;
   };
