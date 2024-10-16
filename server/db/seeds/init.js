@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../../models/User');
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
@@ -9,8 +9,8 @@ exports.seed = async (knex) => {
 
   await knex.raw('ALTER SEQUENCE users_id_seq RESTART WITH 1');
 
-  // User.create(username, password)
-  await User.create('cool_cat', '1234');
-  await User.create('l33t-guy', '1234');
-  await User.create('wowow', '1234');
+  // User.create(firstname,lastname,email, password)
+  await User.create('madison','tolentino', '@gmail', '1234');
+  // await User.create('l33t-guy', '1234');
+  // await User.create('wowow', '1234');
 };

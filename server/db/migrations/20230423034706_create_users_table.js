@@ -4,9 +4,14 @@
  */
 exports.up = (knex) => {
   return knex.schema.createTable('users', (table) => {
+    table.dropColumn('username');
+    table.dropColumn('created_at');
+    table.dropColumn('updated_at');
     table.increments();
-    table.string('username').notNullable().unique();
     table.string('password_hash').notNullable();
+    table.string('first_name').notNullable();
+    table.string('last_name').notNullable();
+    table.string('email').notNullable().unique();
   })
 };
 
