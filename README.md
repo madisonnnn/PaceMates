@@ -80,7 +80,7 @@ With the rising costs of gym memberships in New York City, our application will 
 ---
 
 ## 🧳 User Journey Map
-![User Journey Chart](./images/UserJourneyChart.jpg)
+![User Journey Chart](./images/UserJourneyChart.png)
 User Journey Chart
 
 ## 👭 User-stories
