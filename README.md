@@ -97,7 +97,7 @@ One of the key challenges we anticipate is the integration of Google Maps to dis
 
 **Customizable Event Filters**
 
-Another significant challenge involves enabling users to filter events based on various criteria such as location, date, distance, and difficulty in real-time. The complexity arises from the multiple approaches available for filtering, searching, and sorting the information, as each method can impact performance differently. Developing an efficient search and filter system will require querying the database and dynamically updating results to enhance user experience.
+Another significant challenge involves enabling users to filter events based on various criteria such as location, date, time, and descriptive tags in real-time. The complexity arises from the multiple approaches available for filtering, searching, and sorting the information, as each method can impact performance differently. Developing an efficient search and filter system will require querying the database and dynamically updating results to enhance user experience.
 
 ---
 
