@@ -84,7 +84,8 @@ With the rising costs of gym memberships in New York City, our application will 
 User Journey Chart
 
 ## 👭 User-stories
-**MVP Stories**
+
+### MVP Stories
 **User**
 
 As a user, I want to sign up/log in, so that I can join the community and create/attend events.
@@ -115,7 +116,7 @@ As an event attendee, I want to see my past events, so that I can remember the h
 
 As an event attendee, I want to see my upcoming events, so that I can remember to attend.
 
-**Stretch Stories**
+### Stretch Stories
 **User**
 
 As a user, I want to network with other users through online interaction, so that I can further develop relationships through the website.
