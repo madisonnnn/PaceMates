@@ -45,9 +45,9 @@ class User {
 
 
   // Same as above but uses the username to find the user
-  static async findByName(firstName,lastName) {
-    const query = `SELECT * FROM users WHERE first_name = ? OR last_name = ?`;
-    const result = await knex.raw(query, [firstName, lastName]);
+  static async findByEmail(email) {
+    const query = `SELECT * FROM users WHERE email = ?`;
+    const result = await knex.raw(query, [email]);
     const rawUserData = result.rows[0];
     return rawUserData ? new User(rawUserData) : null;
   }

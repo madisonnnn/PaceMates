@@ -7,7 +7,7 @@ exports.up = async function(knex) {
   table.increments('id')
   table.string('name').notNullable()
   table.string('date').notNullable()
-  table.integer('event_created_by').notNullable()
+  table.integer('event_created_by').unsigned().notNullable()
   table.string('starting_point').notNullable()
   table.string('ending_point').notNullable()
   table.string('description').notNullable()
@@ -15,15 +15,15 @@ exports.up = async function(knex) {
   table.integer('max_participants')
   table.timestamps(true,true)
   
-  table.foreign('event_created_by').references('id').inTable('users')
+  table.foreign('event_created_by').references('id').inTable('users').onDelete('CASCADE')
  })
  .createTable('event_participants', (table) => {
   table.timestamps(true, true)
   table.integer('user_id').notNullable()
   table.integer('event_id').notNullable()
 
-  table.foreign('user_id').references('id').inTable('users')
-  table.foreign('event_id').references('id').inTable('run_events')
+  table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE')
+  table.foreign('event_id').references('id').inTable('run_events').onDelete('CASCADE')
  })
 };
 
