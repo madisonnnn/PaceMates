@@ -9,7 +9,9 @@ export default function SignUpPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [errorText, setErrorText] = useState('');
-  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // users shouldn't be able to see the sign up page if they are already logged in.
@@ -31,7 +33,9 @@ export default function SignUpPage() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === 'username') setUsername(value);
+    if (name === 'first name') setFirstName(value);
+    if (name === 'last name') setLastName(value);
+    if (name === 'email') setEmail(value);
     if (name === 'password') setPassword(value);
   };
 
@@ -39,14 +43,34 @@ export default function SignUpPage() {
     <h1>Sign Up</h1>
     <form onSubmit={handleSubmit} onChange={handleChange} aria-labelledby="create-heading">
       <h2 id="create-heading">Create New User</h2>
-      <label htmlFor="username">Username</label>
+      <label htmlFor="firstName">First Name</label>
       <input
         autoComplete="off"
         type="text"
-        id="username"
-        name="username"
+        id="firstName"
+        name="firstName"
         onChange={handleChange}
-        value={username}
+        value={firstName}
+      />
+
+<label htmlFor="lastName">Last Name</label>
+      <input
+        autoComplete="off"
+        type="text"
+        id="lastName"
+        name="lastName"
+        onChange={handleChange}
+        value={lastName}
+      />
+
+<label htmlFor="email">Email</label>
+      <input
+        autoComplete="off"
+        type="text"
+        id="email"
+        name="email"
+        onChange={handleChange}
+        value={email}
       />
 
       <label htmlFor="password">Password</label>
