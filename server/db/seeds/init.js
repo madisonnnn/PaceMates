@@ -5,10 +5,11 @@ const User = require('../../models/User');
  */
 exports.seed = async (knex) => {
   // Before you have models you can always just do `await knex('table_name').del`
+    
+    
+    await knex('event_participants').del()
     await knex('run_events').del()
     await knex('users').del();
-
-
   await knex.raw('ALTER SEQUENCE users_id_seq RESTART WITH 1');
 
   // User.create(firstname,lastname,email, password)
@@ -27,6 +28,10 @@ exports.seed = async (knex) => {
   await knex('event_participants').insert([
     {event_id:event.id,user_id:user.id}
   ])
+  // await knex('event_participants').where('event_id', user.id).del();
+
+
+  // await knex('run_events').where('event_created_by', user.id).del();
   // await User.create('l33t-guy', '1234');
   // await User.create('wowow', '1234');
 };

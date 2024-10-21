@@ -1,5 +1,7 @@
 const { isAuthorized } = require('../utils/auth-utils');
+
 const Event = require('../models/Events');
+const EventParticipants = require('../models/EventParticipants')
 
 
 exports.listEvents = async (req, res) => {
@@ -19,5 +21,14 @@ exports.createEvent = async (req, res) => {
 
  const event = await Event.create(name, userId, date,starting_point, ending_point,description, distance,max_participants);
 
+ res.send(event);
+};
+
+exports.deleteEvent = async (req, res) => {
+ const eventId = req.params.id
+ const {userId} = req.session
+ console.log(eventId, userId)
+ //const eventParticipants = await EventParticipants.deleteAllFromEvent(userId)
+ const event = await Event.delete(eventId, userId);
  res.send(event);
 };

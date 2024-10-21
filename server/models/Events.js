@@ -2,37 +2,41 @@ const knex = require('../db/knex');
 
 
 class Event {
-
-
-  // Fetches ALL users from the users table, uses the constructor
-  // to format each user (and hide their password hash), and returns.
   static async list() {
+   try {
     const query = `SELECT * FROM run_events`;
     const result = await knex.raw(query);
     console.log(result.rows)
-    return result.rows
+   } catch (error){
+    throw new Error(`Unable to get events: ${error.message}`)
+   }
   }
 
   // Fetches A single event from the run_events table that matches
   // the given event id. If it finds an event, uses the constructor
   // to format the event and returns or returns null if not.
   static async find(id) {
+   try{
     const query = `SELECT * FROM run_events WHERE id = ?`;
-    const result = await knex.raw(query, [id]);
-    const rawEventData = result.rows[0];
-    return rawEventData
+    const {rows:[eventData]} = await knex.raw(query, [id]);
+    return eventData
+   } catch (error){
+    throw new Error(`Unable to get event: ${error.message}`)
+   } 
   }
-
 
   // Same as above but uses the name to find the event
   static async findByCreatedBy(name) {
+   try {
     const query = `SELECT * FROM users WHERE event_created_by = ?`;
     const {rows:[eventData]} = await knex.raw(query, [name]);
     return eventData
+   } catch (error){
+    throw new Error(`Unable to get event: ${error.message}`)
+   } 
   }
 
-  // Creates a new event
-  // in the run_events table. Returns the newly created event
+  // Creates a new event in the run_events table. Returns the newly created event
   static async create(name,eventCreatedBy,date, startingPoint, endingPoint,description, distance,maxParticipants) {
     //console.log(name,eventCreatedBy,date, startingPoint, endingPoint,description, distance,maxParticipants)
     try{
@@ -48,6 +52,7 @@ class Event {
   // Updates the event that matches the given id with new data.
   // Returns the modified event
   static async update(name, eventCreatedBy,startingPoint, endingPoint,distance,maxParticipants) {
+   try {
     const query = `
       UPDATE run_events
       SET name=?
@@ -59,13 +64,38 @@ class Event {
       WHERE id=?
       RETURNING *
     `
-    const result = await knex.raw(query, [name, eventCreatedBy,startingPoint, endingPoint,distance,maxParticipants, id])
-    const rawUpdatedEvent = result.rows[0];
-    return rawUpdatedEvent ? new Event(rawUpdatedEvent) : null;
+    const {rows:[eventData]} = await knex.raw(query, [name, eventCreatedBy,startingPoint, endingPoint,distance,maxParticipants, id])
+    return eventData ? new Event(eventData) : null;
+   }  catch (error){
+    throw new Error(`Unable to get event: ${error.message}`)
+   } 
   };
 
   static async deleteAll() {
+   try {
     return knex('run_events').del()
+   }catch (error){
+    throw new Error(`Unable to delete events: ${error.message}`)
+   } 
+    
+  }
+
+  static async delete(eventId, userId){
+   if (!eventId ) {
+    throw new Error('Invalid eventId ');
+  }
+  if(!userId){
+   throw new Error('Invalid userId ');
+ }
+   try{
+    await knex('event_participants').where('event_id', eventId).del()
+    const query = `DELETE FROM run_events WHERE id = ? AND event_created_by=? 
+     RETURNING *`;
+    const {rows:[eventData]} = await knex.raw(query, [eventId, userId]);
+    return eventData
+   } catch (error){
+    throw new Error(`Unable to delete event: ${error.message}`)
+   }
   }
 }
 
