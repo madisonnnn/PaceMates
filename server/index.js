@@ -15,6 +15,7 @@ const checkAuthentication = require('./middleware/checkAuthentication');
 const authControllers = require('./controllers/authControllers');
 const userControllers = require('./controllers/userControllers');
 const eventControllers = require('./controllers/eventControllers')
+const eventParticipantsControllers = require('./controllers/eventParticipantsControllers')
 const app = express();
 
 // middleware
@@ -49,6 +50,10 @@ app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
 
 app.get('/api/events', eventControllers.listEvents);
 app.post('/api/events', checkAuthentication, eventControllers.createEvent);
+app.delete('/api/events/:id', checkAuthentication, eventControllers.deleteEvent);
+
+app.get('/api/events/:id', eventParticipantsControllers.listParticipants);
+app.post('/api/events/:id', checkAuthentication, eventParticipantsControllers.signUpForEvent);
 
 
 ///////////////////////////////

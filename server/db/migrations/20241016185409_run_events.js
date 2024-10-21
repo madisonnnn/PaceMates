@@ -19,8 +19,8 @@ exports.up = async function(knex) {
  })
  .createTable('event_participants', (table) => {
   table.timestamps(true, true)
-  table.integer('user_id').notNullable()
-  table.integer('event_id').notNullable()
+  table.integer('user_id').unsigned().notNullable()
+  table.integer('event_id').unsigned().notNullable()
 
   table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE')
   table.foreign('event_id').references('id').inTable('run_events').onDelete('CASCADE')
