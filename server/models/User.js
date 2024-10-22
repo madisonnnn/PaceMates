@@ -37,10 +37,14 @@ class User {
   // the given user id. If it finds a user, uses the constructor
   // to format the user and returns or returns null if not.
   static async find(id) {
-    const query = `SELECT * FROM users WHERE id = ?`;
-    const result = await knex.raw(query, [id]);
-    const rawUserData = result.rows[0];
-    return rawUserData ? new User(rawUserData) : null;
+    try{
+      const query = `SELECT * FROM users WHERE id = ?`;
+    const {rows:[eventData]} = await knex.raw(query, [id]);
+    return eventData 
+    } catch (error){
+      throw new Error(`Unable to get user: ${error.message}`) 
+    }
+    
   }
 
 

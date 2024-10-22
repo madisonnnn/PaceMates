@@ -21,3 +21,10 @@ exports.signUpForEvent = async (req, res) => {
  const event = await EventParticipants.signUp(eventId, userId);
  res.send(event);
 };
+
+exports.deleteParticipant = async (req, res) => {
+ const {userId} = req.session
+ const eventId = req.params.id
+ const event = await EventParticipants.delete(userId, eventId);
+ res.send(event);
+};

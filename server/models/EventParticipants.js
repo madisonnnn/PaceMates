@@ -10,10 +10,10 @@ class EventParticipants {
   throw new Error(`Unable to find participants: ${error.message}`)
  }}
 
- static async delete(user){
+ static async delete(user, event){
  try {
-   const query = `DELETE FROM event_participants WHERE user_id = ?`
-   const {rows:[eventData]} = await knex.raw(query, [user]);
+   const query = `DELETE FROM event_participants WHERE user_id = ? AND event_id = ?`
+   const {rows:[eventData]} = await knex.raw(query, [user,event]);
   return eventData
  } catch (error){
   throw new Error(`Unable to delete participant: ${error.message}`)
