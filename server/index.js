@@ -37,23 +37,24 @@ app.delete('/api/logout', authControllers.logoutUser);
 
 
 ///////////////////////////////
-// User Routes
+// Routes
 ///////////////////////////////
 
 app.post('/api/users', userControllers.createUser);
-
-// These actions require users to be logged in (authentication)
-// Express lets us pass a piece of middleware to run for a specific endpoint
 app.get('/api/users', checkAuthentication, userControllers.listUsers);
 app.get('/api/users/:id', checkAuthentication, userControllers.showUser);
 app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
 
 app.get('/api/events', eventControllers.listEvents);
+app.get('/api/events/:id', eventControllers.listEvent);
 app.post('/api/events', checkAuthentication, eventControllers.createEvent);
+app.patch('/api/events/:id', checkAuthentication, eventControllers.updateEvent);
 app.delete('/api/events/:id', checkAuthentication, eventControllers.deleteEvent);
 
 app.get('/api/events/:id', eventParticipantsControllers.listParticipants);
 app.post('/api/events/:id', checkAuthentication, eventParticipantsControllers.signUpForEvent);
+app.delete('/api/events/:id', checkAuthentication, eventParticipantsControllers.deleteParticipant);
+
 
 
 ///////////////////////////////

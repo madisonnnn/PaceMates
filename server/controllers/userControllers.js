@@ -18,10 +18,8 @@ exports.listUsers = async (req, res) => {
 
 exports.showUser = async (req, res) => {
   const { id } = req.params;
-
   const user = await User.find(id);
   if (!user) return res.sendStatus(404);
-
   res.send(user);
 };
 

@@ -5,8 +5,8 @@ class Event {
   static async list() {
    try {
     const query = `SELECT * FROM run_events`;
-    const result = await knex.raw(query);
-    console.log(result.rows)
+    const {rows:[eventData]} = await knex.raw(query);
+    return eventData
    } catch (error){
     throw new Error(`Unable to get events: ${error.message}`)
    }
@@ -51,23 +51,24 @@ class Event {
 
   // Updates the event that matches the given id with new data.
   // Returns the modified event
-  static async update(name, eventCreatedBy,startingPoint, endingPoint,distance,maxParticipants) {
+  static async update(name, date,starting_point, ending_point,description, distance,max_participants,eventId, userId) {
    try {
     const query = `
       UPDATE run_events
-      SET name=?
-      SET event_created_by=?
-      SET starting_point=?
-      SET ending_point=?
-      SET distance=?
-      SET max_participants=?
-      WHERE id=?
+      SET name=?,
+       date=?,
+       starting_point=?,
+       ending_point=?,
+       description=?,
+       distance=?,
+       max_participants=?
+      WHERE id=? AND event_created_by = ?
       RETURNING *
     `
-    const {rows:[eventData]} = await knex.raw(query, [name, eventCreatedBy,startingPoint, endingPoint,distance,maxParticipants, id])
-    return eventData ? new Event(eventData) : null;
+    const {rows:[eventData]} = await knex.raw(query, [name, date,starting_point, ending_point,description, distance,max_participants,eventId,userId])
+    return eventData 
    }  catch (error){
-    throw new Error(`Unable to get event: ${error.message}`)
+    throw new Error(`Unable to update event: ${error.message}`)
    } 
   };
 
@@ -82,7 +83,7 @@ class Event {
 
   static async delete(eventId, userId){
    if (!eventId ) {
-    throw new Error('Invalid eventId ');
+    throw new Error('Invalid eventId');
   }
   if(!userId){
    throw new Error('Invalid userId ');
