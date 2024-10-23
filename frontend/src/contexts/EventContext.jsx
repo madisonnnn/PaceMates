@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react';
-import { getAllEvents } from '../adapters/event-adapter';
 
 export const EventContext = createContext();
 
