@@ -1,32 +1,37 @@
 import { useState, useContext } from 'react';
 import { EventContext } from '../contexts/EventContext';
+import { createEvent } from '../adapters/event-adapter';
 
 const CreateEventForm = () => {
   const { addEvent } = useContext(EventContext);
   const [formData, setFormData] = useState({
-    title: '',
+    name: '',
     date: '',
-    time: '',
-    startAddress: '',
-    endAddress: '',
-    location: '',
+    //time: '',
+    starting_point: '',
+    ending_point: '',
+    //location: '',
     description: '',
-    maxParticipants: '',
+    max_participants: '',
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newEvent = {
-      ...formData,
-      id: Date.now(),
-      imageUrl: 'default-image-url'
-    };
+    const formData = new FormData(e.target)
+    // const newEvent = {
+    //   ...formData,
+    //   id: Date.now(),
+    //   imageUrl: 'default-image-url'
+    // };
+   
+    const [newEvent, error] = await createEvent(Object.fromEntries(formData)); 
     addEvent(newEvent);
-    setFormData({ title: '', date: '', time: '', startAddress: '', endAddress: '',location: '', description: '', maxParticipants: '' });
+    setFormData({ name: '', date: '', starting_point: '', ending_point: '', description: '', max_participants: '' });
+
   };
 
   return (
@@ -37,12 +42,12 @@ const CreateEventForm = () => {
         <input
           type="text"
           id="event-name"
-          name="title"
-          value={formData.title}
+          name="name"
+          value={formData.name}
           onChange={handleChange}
         />
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="event-time">Event Start Time:</label>
         <input
           type="time"
@@ -51,7 +56,7 @@ const CreateEventForm = () => {
           value={formData.time}
           onChange={handleChange}
         />
-      </div>
+      </div> */}
       <div>
         <label htmlFor="event-date">Event Date:</label>
         <input
@@ -71,9 +76,9 @@ const CreateEventForm = () => {
         <input
           type="text"
           id="start-address"
-          name="startAddress"
+          name="starting_point"
           placeholder="Enter starting point"
-          value={formData.startAddress}
+          value={formData.starting_point}
           onChange={handleChange}
         />
       </div>
@@ -82,13 +87,13 @@ const CreateEventForm = () => {
         <input
           type="text"
           id="end-address"
-          name="endAddress"
+          name="ending_point"
           placeholder="Enter ending point"
-          value={formData.endAddress}
+          value={formData.ending_point}
           onChange={handleChange}
         />
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="location">Event Location (Borough):</label>
         <select
           id="location"
@@ -103,7 +108,7 @@ const CreateEventForm = () => {
           <option value="Bronx">Bronx</option>
           <option value="Staten Island">Staten Island</option>
         </select>
-      </div>
+      </div> */}
       <div>
         <label htmlFor="event-description">Event Description:</label>
         <textarea
@@ -118,10 +123,10 @@ const CreateEventForm = () => {
         <input
           type="number"
           id="max-participants"
-          name="maxParticipants"
+          name="max_participants"
           placeholder="Enter maximum number of participants"
           min="1"  // at least 1 participant -> person who created event would attend ? 
-          value={formData.maxParticipants}
+          value={formData.max_participants}
           onChange={handleChange}
         />
       </div>
