@@ -28,7 +28,7 @@ const QuoteProvider = ({ children }) => {
      if (quotes.length > 0) {
          const interval = setInterval(() => {
              setCurrentIndex((prevIndex) => (prevIndex + 1) % quotes.length)
-         }, 5000)
+         }, 3600000)
 
          return () => clearInterval(interval)
      }
