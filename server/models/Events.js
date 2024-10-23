@@ -5,8 +5,8 @@ class Event {
   static async list() {
    try {
     const query = `SELECT * FROM run_events`;
-    const {rows:[eventData]} = await knex.raw(query);
-    return eventData
+    const {rows} = await knex.raw(query);
+    return rows
    } catch (error){
     throw new Error(`Unable to get events: ${error.message}`)
    }
