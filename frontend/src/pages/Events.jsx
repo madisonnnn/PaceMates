@@ -17,6 +17,7 @@ export default function EventsPage() {
       </button>
 
       {showForm && <CreateEventForm />}
+      {/* filter by location, distance, and size */}
       <EventList />
     </div>
   );

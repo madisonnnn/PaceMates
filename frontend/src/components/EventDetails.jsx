@@ -20,6 +20,7 @@ const EventDetails = () => {
       <p>Start Address: {event.startAddress}</p>
       <p>End Address: {event.endAddress}</p>
       <p>Figure out distance</p>
+      <p>Location: {event.location}</p>
 
       <h2>{event.title}</h2>
       <p>Date: {event.date}</p>
