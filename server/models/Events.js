@@ -98,6 +98,36 @@ class Event {
     throw new Error(`Unable to delete event: ${error.message}`)
    }
   }
+
+  static async filter(size,distance,date){
+   const arr = [] 
+   let query = `SELECT * FROM run_events`;
+
+   try{
+   let whereClause = false
+    if (size) {
+     query += ` WHERE max_participants = ?`;
+     arr.push(size);
+     whereClause = true;
+    }
+
+    if(distance) {
+     query += whereClause ? ` AND distance = ?` : ` WHERE distance = ?`;
+     arr.push(distance);
+     whereClause = true;
+    }
+
+    if(date) {
+     query += whereClause ? ` AND date = ?` : ` WHERE date = ?`;
+     arr.push(date);
+     }
+
+    const {rows} = await knex.raw(query, arr);
+    return rows
+   } catch (error){
+    throw new Error(`Unable to filter events: ${error.message}`)
+   }
+  }
 }
 
 module.exports = Event;

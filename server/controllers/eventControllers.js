@@ -51,3 +51,11 @@ exports.deleteEvent = async (req, res) => {
  const event = await Event.delete(eventId, userId);
  res.send(event);
 };
+
+exports.filterEvents = async (req, res) => {
+ const {size, distance, date} = req.query
+ //console.log(eventId, userId)
+ //const eventParticipants = await EventParticipants.deleteAllFromEvent(userId)
+ const event = await Event.filter(size,distance,date);
+ res.send(event);
+};
