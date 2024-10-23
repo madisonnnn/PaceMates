@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { createUser } from "../adapters/user-adapter";
+import QuoteDisplay from "../components/QuoteDisplay";
 
 // Controlling the sign up form is a good idea because we want to add (eventually)
 // more validation and provide real time feedback to the user about usernames and passwords
@@ -33,8 +34,8 @@ export default function SignUpPage() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === 'first name') setFirstName(value);
-    if (name === 'last name') setLastName(value);
+    if (name === 'firstName') setFirstName(value);
+    if (name === 'lastName') setLastName(value);
     if (name === 'email') setEmail(value);
     if (name === 'password') setPassword(value);
   };
@@ -92,5 +93,10 @@ export default function SignUpPage() {
     </form>
     {!!errorText && <p>{errorText}</p>}
     <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
+    <section className='quote-space'>
+      <section className="quotesection">
+        <QuoteDisplay />
+      </section>
+    </section>
   </>;
 }

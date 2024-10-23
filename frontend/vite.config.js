@@ -1,6 +1,7 @@
-/* eslint-disable */
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+const SERVER_PORT = 3000;
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,10 +9,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://0.0.0.0:3000',
+        target: `http://localhost:${SERVER_PORT}`,
         changeOrigin: true,
-        secure: false,
-        ws: true,
       },
     },
   },

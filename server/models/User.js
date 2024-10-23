@@ -22,9 +22,6 @@ class User {
   isValidPassword = async (password) => (
     authUtils.isValidPassword(password, this.#passwordHash)
   );
-
-
-
   // Fetches ALL users from the users table, uses the constructor
   // to format each user (and hide their password hash), and returns.
   static async list() {
@@ -39,8 +36,8 @@ class User {
   static async find(id) {
     try{
       const query = `SELECT * FROM users WHERE id = ?`;
-    const {rows:[eventData]} = await knex.raw(query, [id]);
-    return eventData 
+    const {rows:[userData]} = await knex.raw(query, [id]);
+    return userData ? new User(userData) : null;
     } catch (error){
       throw new Error(`Unable to get user: ${error.message}`) 
     }
@@ -50,10 +47,14 @@ class User {
 
   // Same as above but uses the username to find the user
   static async findByEmail(email) {
-    const query = `SELECT * FROM users WHERE email = ?`;
-    const result = await knex.raw(query, [email]);
-    const rawUserData = result.rows[0];
-    return rawUserData ? new User(rawUserData) : null;
+    try{
+      const query = `SELECT * FROM users WHERE email = ?`;
+    const {rows:[userData]} = await knex.raw(query, [email]);
+    return userData ? new User(userData) : null;
+    } catch (error){
+      throw new Error(`Unable to get user: ${error.message}`) 
+    }
+    
   }
 
   // Hashes the given password and then creates a new user
