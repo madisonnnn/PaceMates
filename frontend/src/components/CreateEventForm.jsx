@@ -9,9 +9,9 @@ const CreateEventForm = () => {
     time: '',
     startAddress: '',
     endAddress: '',
+    location: '',
     description: '',
     maxParticipants: '',
-    // include location -> dropdown of boroughs 
   });
 
   const handleChange = (e) => {
@@ -26,7 +26,7 @@ const CreateEventForm = () => {
       imageUrl: 'default-image-url'
     };
     addEvent(newEvent);
-    setFormData({ title: '', date: '', time: '', startAddress: '', endAddress: '', description: '', maxParticipants: '' });
+    setFormData({ title: '', date: '', time: '', startAddress: '', endAddress: '',location: '', description: '', maxParticipants: '' });
   };
 
   return (
@@ -87,6 +87,22 @@ const CreateEventForm = () => {
           value={formData.endAddress}
           onChange={handleChange}
         />
+      </div>
+      <div>
+        <label htmlFor="location">Event Location (Borough):</label>
+        <select
+          id="location"
+          name="location"
+          value={formData.location}
+          onChange={handleChange}
+        >
+          <option value="">Select a borough</option>
+          <option value="Manhattan">Manhattan</option>
+          <option value="Brooklyn">Brooklyn</option>
+          <option value="Queens">Queens</option>
+          <option value="Bronx">Bronx</option>
+          <option value="Staten Island">Staten Island</option>
+        </select>
       </div>
       <div>
         <label htmlFor="event-description">Event Description:</label>

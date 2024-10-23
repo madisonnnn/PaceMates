@@ -27,12 +27,18 @@ const EventCard = ({ event }) => {
             Starting Address: {event.startAddress}
           </span>
         </div>
+
+        <div className="location">
+          <span>
+          Location: {event.location}
+          </span>
+        </div>
       </div>
 
       <div className="extra content">
         <span>
           <i className="fas fa-user" />
-          Event created by: {event.userId}
+          Event created by: {event.id}
         </span>
       </div>
     </div>
