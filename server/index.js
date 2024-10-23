@@ -16,6 +16,7 @@ const authControllers = require('./controllers/authControllers');
 const userControllers = require('./controllers/userControllers');
 const eventControllers = require('./controllers/eventControllers')
 const eventParticipantsControllers = require('./controllers/eventParticipantsControllers')
+const quoteControllers = require('./controllers/quotesControllers')
 const app = express();
 
 // middleware
@@ -55,6 +56,8 @@ app.get('/api/events/:id', eventParticipantsControllers.listParticipants);
 app.post('/api/events/:id', checkAuthentication, eventParticipantsControllers.signUpForEvent);
 app.delete('/api/events/:id', checkAuthentication, eventParticipantsControllers.deleteParticipant);
 
+
+app.get('/api/quotes', quoteControllers.giveQuote)
 
 
 ///////////////////////////////
