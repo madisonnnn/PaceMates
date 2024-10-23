@@ -46,8 +46,8 @@ app.get('/api/users', checkAuthentication, userControllers.listUsers);
 app.get('/api/users/:id', checkAuthentication, userControllers.showUser);
 app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
 
-app.get('/api/events', eventControllers.listEvents);
 app.get('/api/events', eventControllers.filterEvents);
+app.get('/api/events', eventControllers.listEvents);
 app.get('/api/events/:id', eventControllers.listEvent);
 app.post('/api/events', checkAuthentication, eventControllers.createEvent);
 app.patch('/api/events/:id', checkAuthentication, eventControllers.updateEvent);
