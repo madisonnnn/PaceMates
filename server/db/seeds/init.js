@@ -21,7 +21,7 @@ exports.seed = async (knex) => {
   ])
   const [user] = await knex('users').select('id').limit(1)
   await knex('run_events').insert([
-    { name: 'andy',date: 'tmrw',event_created_by: user.id, starting_point: 'marcy', ending_point: 'train',description:'fun run', distance: 3.3,max_participants:'14'},
+    { name: 'andy',date: 'tmrw',event_created_by: user.id, starting_point: 'marcy', ending_point: 'train',description:'fun run', distance: 3.3,max_participants:'14',time:'11',location:'manhattan'},
   ])
 
   const [event] = await knex('run_events').select('id').limit(1)

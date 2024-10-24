@@ -1,12 +1,22 @@
 import { useState } from 'react';
+import { getFilteredEvents } from '../adapters/event-adapter';
 
 export default function FilterEvents ({ onFilterChange }) {
   const [location, setLocation] = useState('');
   const [distance, setDistance] = useState(5); 
   const [maxSize, setMaxSize] = useState(10); 
+  const [filteredEvents, setFilteredEvents] = useState([])
+  const [error, setError] = useState(null);
 
-  const handleApplyFilters = () => {
+  const handleApplyFilters = async () => {
     onFilterChange({ location, distance, maxSize });
+    try {
+      const events = await getFilteredEvents({ location, distance, maxSize });
+      setFilteredEvents(events)
+    } catch (error) {
+      console.error("Error fetching events:", error);
+      setError("Failed to load filtered events.");
+    }
   };
 
   return (

@@ -8,34 +8,35 @@ const EventDetails = () => {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false); // State for user authentication status
+  // const navigate = useNavigate(); // for redirection
 
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const eventData = await getEvent(parseInt(id))
+        const [eventData] = await getEvent(parseInt(id));
         if (eventData) {
-          setEvent(eventData)
+          setEvent(eventData);
         } else {
-          setError('Event not found')
+          setError('Event not found');
         }
       } catch (error) {
-        setError('Error fetching event details')
+        setError('Error fetching event details');
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     };
-
-    fetchEvent();
-  }, [id]);
-
+    fetchEvent()
+  }, [id])
   if (loading) {
     return <p>Loading event details...</p>;
   }
 
+  // Error state
   if (error) {
     return <p>{error}</p>;
   }
-  console.log(event)
+
   return (
     // figure out what makes more sense to have in the card vs here
     // think max needs to be in card
@@ -43,7 +44,7 @@ const EventDetails = () => {
       {/* Map */}
       <p>Start Address: {event.starting_point}</p>
       <p>End Address: {event.ending_point}</p>
-      <p>Figure out distance</p>
+      <p>Distance: {event.distance}</p>
       <p>Location: {event.location}</p>
 
       <h2>{event.title}</h2>
