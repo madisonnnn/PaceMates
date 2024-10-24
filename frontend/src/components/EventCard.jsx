@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { getEvent } from '../adapters/event-adapter';
 
 const EventCard = ({ event }) => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const EventCard = ({ event }) => {
       </div>
 
       <div className="content">
-        <div className="header">{event.title}</div>
+        <div className="header">{event.name}</div>
       
         <div className="meta">
           <span>
@@ -24,7 +25,7 @@ const EventCard = ({ event }) => {
 
         <div className="description">
           <span>
-            Starting Address: {event.startAddress}
+            Starting Address: {event.starting_point}
           </span>
         </div>
 
