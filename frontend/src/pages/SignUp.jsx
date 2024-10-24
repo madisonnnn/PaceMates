@@ -92,6 +92,7 @@ export default function SignUpPage() {
       <button>Sign Up Now!</button>
     </form>
     {!!errorText && <p>{errorText}</p>}
+    {/* put this line below in the form? */}
     <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
     <section className='quote-space'>
       <section className="quotesection">

@@ -1,13 +1,9 @@
-import QuoteDisplay from "../components/QuoteDisplay"
+import HomePageDetails from "../components/HomePageDetails"
 
 export default function HomePage() {
   return <>
-    <h1>Home</h1>
-    <p>Put something interesting here!</p>
-    <section className='quote-space'>
-      <section className="quotesection">
-        <QuoteDisplay />
-      </section>
+    <section>
+      <HomePageDetails />
     </section>
   </>
 }

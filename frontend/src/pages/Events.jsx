@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import CreateEventForm from '../components/CreateEventForm';
 import EventList from '../components/EventList';
+import QuoteDisplay from "../components/QuoteDisplay"
+import FilterEvents from '../components/FilterEvents';
 
 export default function EventsPage() {
   const [showForm, setShowForm] = useState(false);
@@ -9,7 +11,12 @@ export default function EventsPage() {
     setShowForm(!showForm);
   }
 
-  return (
+  return <>
+    <section className='quote-space'>
+      <section className="quotesection">
+        <QuoteDisplay />
+      </section>
+    </section>
     <div>
       <h1>Events</h1>
       <button onClick={handleCreateEventClick}>
@@ -17,8 +24,8 @@ export default function EventsPage() {
       </button>
 
       {showForm && <CreateEventForm />}
-      {/* filter by location, distance, and size */}
+      <FilterEvents />
       <EventList />
     </div>
-  );
+  </>
 }

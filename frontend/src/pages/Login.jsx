@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { logUserIn } from "../adapters/auth-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function LoginPage() {
   return <>
     <h1>Login</h1>
     <form onSubmit={handleSubmit} aria-labelledby="login-heading">
-      <h2 id='login-heading'>Log back in!</h2>
+      <h2 id='login-heading'>Log in!</h2>
       <label htmlFor="email">Email</label>
       <input type="text" autoComplete="email" id="email" name="email" />
 
@@ -36,5 +37,6 @@ export default function LoginPage() {
       <button>Log in!</button>
     </form>
     {!!errorText && <p>{errorText}</p>}
+    <p>Don't Have an Account? <Link to="/sign-up">Sign Up!</Link></p>
   </>;
 }
