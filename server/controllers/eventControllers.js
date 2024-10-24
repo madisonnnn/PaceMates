@@ -31,14 +31,14 @@ exports.createEvent = async (req, res) => {
 };
 
 exports.updateEvent = async (req, res) => {
- const { name, date, starting_point, ending_point, description, max_participants } = req.body;
+ const { name, date, starting_point, ending_point, description, max_participants,time,location } = req.body;
  const eventId = req.params.id
  const {userId} = req.session
  //{ "name": "madison","date": "tmrw", "starting_point": "1", "ending_point": "2","description":"fun run,","max_participants":"14"}
  const distance = ending_point - starting_point 
  //console.log(name, date,starting_point, ending_point,description, distance,max_participants)
 
- const event = await Event.update(name, date, starting_point, ending_point,description, distance, max_participants, eventId,userId);
+ const event = await Event.update(name, date, starting_point, ending_point,description, distance, max_participants,time,location, eventId,userId);
 
  res.send(event);
 };
@@ -53,10 +53,10 @@ exports.deleteEvent = async (req, res) => {
 };
 
 exports.filterEvents = async (req, res) => {
- const {size, distance, date} = req.query
+ const {size, distance, location} = req.query
  //console.log(eventId, userId)
  console.log(req.query)
  //const eventParticipants = await EventParticipants.deleteAllFromEvent(userId)
- const event = await Event.filter(size,distance,date);
+ const event = await Event.filter(size,distance,location);
  res.send(event);
 };
