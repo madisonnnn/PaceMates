@@ -36,7 +36,6 @@ const EventDetails = () => {
   if (error) {
     return <p>{error}</p>;
   }
-
   return (
     // figure out what makes more sense to have in the card vs here
     // think max needs to be in card

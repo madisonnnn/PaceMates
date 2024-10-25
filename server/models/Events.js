@@ -38,10 +38,10 @@ class Event {
 
   // Creates a new event in the run_events table. Returns the newly created event
   static async create(name,eventCreatedBy,date, startingPoint, endingPoint,description, distance,maxParticipants,time,location) {
-    // console.log(name,eventCreatedBy,date, startingPoint, endingPoint,description, distance,maxParticipants,time,location)
+    //console.log(name,eventCreatedBy,date, startingPoint, endingPoint,description, distance,maxParticipants)
     try{
     const query = `INSERT INTO run_events (name, event_created_by, date, starting_point, ending_point, description, distance, max_participants,time,location)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?) RETURNING *`;
     const {rows:[eventData]} = await knex.raw(query, [name, eventCreatedBy, date, startingPoint, endingPoint,description, distance,maxParticipants,time,location]);
     return eventData
    } catch (error){

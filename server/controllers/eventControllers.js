@@ -25,7 +25,6 @@ exports.createEvent = async (req, res) => {
  const distance = ending_point - starting_point 
  // console.log(name,date, starting_point, ending_point,description, distance,max_participants,time,location)
 
-
  const event = await Event.create(name, userId, date,starting_point, ending_point,description, distance,max_participants,time,location);
 
  res.send(event);
