@@ -16,7 +16,7 @@ exports.listEvent = async (req, res) => {
 };
 
 exports.createEvent = async (req, res) => {
- const { name, date, starting_point, ending_point, description, max_participants } = req.body;
+ const { name, date, starting_point, ending_point, description, max_participants ,time,location} = req.body;
  const {userId} = req.session
  // console.log(req.body)
  // console.log(req.session)
@@ -25,7 +25,7 @@ exports.createEvent = async (req, res) => {
  const distance = ending_point - starting_point 
  //console.log(name, userId, date,starting_point, ending_point,description, distance,max_participants)
 
- const event = await Event.create(name, userId, date,starting_point, ending_point,description, distance,max_participants);
+ const event = await Event.create(name, userId, date,starting_point, ending_point,description, distance,max_participants,time,location);
 
  res.send(event);
 };
