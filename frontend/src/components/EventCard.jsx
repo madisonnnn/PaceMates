@@ -31,7 +31,7 @@ const EventCard = ({ event }) => {
 
         <div className="location">
           <span>
-          Location: {event.location}
+            Location: {event.location}
           </span>
         </div>
       </div>
@@ -39,6 +39,7 @@ const EventCard = ({ event }) => {
       <div className="extra content">
         <span>
           <i className="fas fa-user" />
+          {/* change this to name of creator of event */}
           Event created by: {event.id}
         </span>
       </div>

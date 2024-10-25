@@ -1,4 +1,4 @@
-import { useContext,useState,useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { EventContext } from '../contexts/EventContext';
 import EventCard from './EventCard';
 import { getAllEvents } from '../adapters/event-adapter';

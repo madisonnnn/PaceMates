@@ -5,10 +5,10 @@ exports.up = (knex) => {
   })
 };
 
-
 exports.down = (knex) => {
   return knex.schema.alterTable('users', (table) => {
     table.dropColumn('created_at');
     table.dropColumn('updated_at');
   })
 };
+

@@ -1,6 +1,5 @@
 const knex = require('../db/knex');
 
-
 class Event {
   static async list() {
    try {
@@ -37,13 +36,14 @@ class Event {
   }
 
   // Creates a new event in the run_events table. Returns the newly created event
-  static async create(name,eventCreatedBy,date, startingPoint, endingPoint,description, distance,maxParticipants) {
+  static async create(name, eventCreatedBy, date, time, location, startingPoint, endingPoint, description, distance, maxParticipants) {
     //console.log(name,eventCreatedBy,date, startingPoint, endingPoint,description, distance,maxParticipants)
+    console.log(name, eventCreatedBy, date, time, location, startingPoint, endingPoint, description, distance, maxParticipants)
     try{
-    const query = `INSERT INTO run_events (name, event_created_by, date, starting_point, ending_point, description, distance, max_participants)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
-    const {rows:[eventData]} = await knex.raw(query, [name, eventCreatedBy, date, startingPoint, endingPoint,description, distance,maxParticipants]);
-    return eventData
+    const query = `INSERT INTO run_events (name, event_created_by, date, time, location, starting_point, ending_point, description, distance, max_participants)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
+    const {rows:[eventData]} = await knex.raw(query, [name, eventCreatedBy, date, time, location, startingPoint, endingPoint, description, distance, maxParticipants]);
+    return eventData;
    } catch (error){
     throw new Error(`Unable to create event: ${error.message}`)
    }
@@ -51,12 +51,14 @@ class Event {
 
   // Updates the event that matches the given id with new data.
   // Returns the modified event
-  static async update(name, date,starting_point, ending_point,description, distance,max_participants,eventId, userId) {
+  static async update(name, date, time, location, starting_point, ending_point, description, distance, max_participants, eventId, userId) {
    try {
     const query = `
       UPDATE run_events
       SET name=?,
        date=?,
+       time=?,
+       location=?,
        starting_point=?,
        ending_point=?,
        description=?,
@@ -64,9 +66,9 @@ class Event {
        max_participants=?
       WHERE id=? AND event_created_by = ?
       RETURNING *
-    `
-    const {rows:[eventData]} = await knex.raw(query, [name, date,starting_point, ending_point,description, distance,max_participants,eventId,userId])
-    return eventData 
+    `;
+    const {rows:[eventData]} = await knex.raw(query, [name, date, time, location, starting_point, ending_point, description, distance, max_participants, eventId, userId])
+    return eventData; 
    }  catch (error){
     throw new Error(`Unable to update event: ${error.message}`)
    } 
@@ -99,7 +101,7 @@ class Event {
    }
   }
 
-  static async filter(size,distance,date){
+  static async filter(size, distance, date){
    const arr = [] 
    let query = `SELECT * FROM run_events`;
 

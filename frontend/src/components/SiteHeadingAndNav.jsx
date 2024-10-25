@@ -18,8 +18,8 @@ export default function SiteHeadingAndNav() {
                 {/* Dashboard will include -> upcoming events, button to "join more events", past events*/}
                 {/* No more home page? */}
               <li><NavLink to='/events'>Events</NavLink></li>
-              <li><NavLink to='/users' end={true}>Users</NavLink></li>
-              <li><NavLink to={`/users/${currentUser.id}`}>{currentUser.username}</NavLink></li>
+              {/* <li><NavLink to='/users' end={true}>Users</NavLink></li> */}
+              <li><NavLink to={`/users/${currentUser.id}`}>Fix Name {currentUser.firstName} {currentUser.lastName}</NavLink></li>
             </>
             : <>
               <li><NavLink to='/events'>Events</NavLink></li>
