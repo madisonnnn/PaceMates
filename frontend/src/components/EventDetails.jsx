@@ -12,7 +12,7 @@ const EventDetails = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const eventData = await getEvent(parseInt(id))
+        const [eventData] = await getEvent(parseInt(id))
         if (eventData) {
           setEvent(eventData)
         } else {
@@ -35,7 +35,7 @@ const EventDetails = () => {
   if (error) {
     return <p>{error}</p>;
   }
-  console.log(event)
+  // console.log(event)
   return (
     // figure out what makes more sense to have in the card vs here
     // think max needs to be in card

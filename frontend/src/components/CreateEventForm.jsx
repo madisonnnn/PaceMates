@@ -7,10 +7,10 @@ const CreateEventForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     date: '',
-    //time: '',
+    time: '',
     starting_point: '',
     ending_point: '',
-    //location: '',
+    location: '',
     description: '',
     max_participants: '',
   });
@@ -30,7 +30,7 @@ const CreateEventForm = () => {
    
     const [newEvent, error] = await createEvent(Object.fromEntries(formData)); 
     addEvent(newEvent);
-    setFormData({ name: '', date: '', starting_point: '', ending_point: '', description: '', max_participants: '' });
+    setFormData({ name: '', date: '',time:'', starting_point: '', ending_point: '', location:'', description: '', max_participants: '' });
 
   };
 
@@ -47,7 +47,7 @@ const CreateEventForm = () => {
           onChange={handleChange}
         />
       </div>
-      {/* <div>
+      <div>
         <label htmlFor="event-time">Event Start Time:</label>
         <input
           type="time"
@@ -56,7 +56,7 @@ const CreateEventForm = () => {
           value={formData.time}
           onChange={handleChange}
         />
-      </div> */}
+      </div>
       <div>
         <label htmlFor="event-date">Event Date:</label>
         <input
@@ -93,7 +93,7 @@ const CreateEventForm = () => {
           onChange={handleChange}
         />
       </div>
-      {/* <div>
+      <div>
         <label htmlFor="location">Event Location (Borough):</label>
         <select
           id="location"
@@ -108,7 +108,7 @@ const CreateEventForm = () => {
           <option value="Bronx">Bronx</option>
           <option value="Staten Island">Staten Island</option>
         </select>
-      </div> */}
+      </div>
       <div>
         <label htmlFor="event-description">Event Description:</label>
         <textarea
