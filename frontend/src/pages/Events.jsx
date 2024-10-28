@@ -6,6 +6,7 @@ import FilterEvents from '../components/FilterEvents';
 
 export default function EventsPage() {
   const [showForm, setShowForm] = useState(false);
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
   const handleCreateEventClick = () => {
     setShowForm(!showForm);
@@ -24,8 +25,8 @@ export default function EventsPage() {
       </button>
 
       {showForm && <CreateEventForm />}
-      <FilterEvents />
-      <EventList />
+      <FilterEvents onFilter={setFilteredEvents} />
+      <EventList filteredEvents={filteredEvents} />
     </div>
   </>
 }
