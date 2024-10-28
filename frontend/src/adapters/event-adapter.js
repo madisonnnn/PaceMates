@@ -9,7 +9,7 @@ export const createEvent = async ({ name, date, starting_point, ending_point, de
 export const getFilteredEvents = async ({ location, distance, size }) => {
  let url = baseUrl + '?'
  let andClause = false
-    if (size) {
+    if (location) {
      url += `location=${location}`;
      andClause = true;
     }
@@ -19,10 +19,11 @@ export const getFilteredEvents = async ({ location, distance, size }) => {
      andClause = true;
     }
 
-    if(date) {
+    if(size) {
      url += andClause ?`&size=${size}` : `size=${size}`;
      }
-
+     
+     console.log("Request URL:", url);
  const [events, error] = await fetchHandler(url);
  if (error) console.log(error); 
  return events || [];

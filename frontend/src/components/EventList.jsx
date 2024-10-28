@@ -1,14 +1,20 @@
 import { useContext,useState,useEffect } from 'react';
 import { EventContext } from '../contexts/EventContext';
 import EventCard from './EventCard';
-import { getAllEvents } from '../adapters/event-adapter';
+import { getFilteredEvents, getAllEvents } from '../adapters/event-adapter';
 
-const EventList = () => {
+const EventList = ({filteredEvents}) => {
   const [eventList, setEventList] = useState([]);
 
+
   useEffect(() => {
+    if(filteredEvents && filteredEvents.length > 0){
+       setEventList(filteredEvents);
+    }
+   else {
     getAllEvents().then(setEventList);
-  }, []);
+   }
+  }, [eventList]);
 
   return (
     <div className="event-list">

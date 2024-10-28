@@ -104,11 +104,11 @@ const CreateEventForm = () => {
           onChange={handleChange}
         >
           <option value="">Select a borough</option>
-          <option value="Manhattan">Manhattan</option>
-          <option value="Brooklyn">Brooklyn</option>
-          <option value="Queens">Queens</option>
-          <option value="Bronx">Bronx</option>
-          <option value="Staten Island">Staten Island</option>
+          <option value="manhattan">Manhattan</option>
+          <option value="brooklyn">Brooklyn</option>
+          <option value="queens">Queens</option>
+          <option value="bronx">Bronx</option>
+          <option value="staten island">Staten Island</option>
         </select>
       </div>
       <div>
