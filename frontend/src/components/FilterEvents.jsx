@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getFilteredEvents } from '../adapters/event-adapter';
 
 export default function FilterEvents ({onFilter}) {
   const [location, setLocation] = useState('');
   const [distance, setDistance] = useState(null); 
   const [maxSize, setMaxSize] = useState(null); 
-  const [filteredEvents, setFilteredEvents] = useState([])
   const [error, setError] = useState(null);
-  const [eventList, setEventList] = useState([]);
 
   const handleApplyFilters = async () => {
     const filters = { location, distance: Number(distance), size: maxSize }

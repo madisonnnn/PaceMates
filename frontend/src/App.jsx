@@ -12,6 +12,7 @@ import UserContext from './contexts/current-user-context';
 import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
+import { ParticipantProvider } from './contexts/ParticipantContext';
 
 export default function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -23,7 +24,8 @@ export default function App() {
     <>
       <SiteHeadingAndNav />
       <main>
-        <EventProvider>
+        <ParticipantProvider>
+           <EventProvider>
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/events' element={<EventsPage />} />
@@ -35,6 +37,8 @@ export default function App() {
               <Route path='*' element={<NotFoundPage />} />
             </Routes>
           </EventProvider>
+        </ParticipantProvider>
+       
       </main>
     </>
   );

@@ -1,7 +1,6 @@
-import { useContext,useState,useEffect } from 'react';
-import { EventContext } from '../contexts/EventContext';
+import { useState,useEffect } from 'react';
 import EventCard from './EventCard';
-import { getFilteredEvents, getAllEvents } from '../adapters/event-adapter';
+import { getAllEvents } from '../adapters/event-adapter';
 
 const EventList = ({filteredEvents}) => {
   const [eventList, setEventList] = useState([]);

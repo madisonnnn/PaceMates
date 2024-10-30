@@ -3,9 +3,12 @@ const knex = require('../db/knex');
 class EventParticipants {
  static async listAll(event_id) {
   try {
-   const query = `SELECT * FROM event_participants WHERE event_id = ?`
-   const {rows:[eventData]} = await knex.raw(query, [event_id]);
-  return eventData
+   const query = `SELECT event_participants.user_id, users.first_name, users.last_name
+   FROM event_participants
+   INNER JOIN users ON event_participants.user_id = users.id
+   WHERE event_id=?`
+   const {rows} = await knex.raw(query, [event_id]);
+  return rows
  } catch (error){
   throw new Error(`Unable to find participants: ${error.message}`)
  }}

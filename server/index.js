@@ -53,9 +53,9 @@ app.post('/api/events', checkAuthentication, eventControllers.createEvent);
 app.patch('/api/events/:id', checkAuthentication, eventControllers.updateEvent);
 app.delete('/api/events/:id', checkAuthentication, eventControllers.deleteEvent);
 
-app.get('/api/events/:id', eventParticipantsControllers.listParticipants);
-app.post('/api/events/:id', checkAuthentication, eventParticipantsControllers.signUpForEvent);
-app.delete('/api/events/:id', checkAuthentication, eventParticipantsControllers.deleteParticipant);
+app.get('/api/events/:id/participants', eventParticipantsControllers.listParticipants);
+app.post('/api/events/:id/participants', checkAuthentication, eventParticipantsControllers.signUpForEvent);
+app.delete('/api/events/:id/participants', checkAuthentication, eventParticipantsControllers.deleteParticipant);
 
 
 app.get('/api/quotes', quoteControllers.giveQuote)

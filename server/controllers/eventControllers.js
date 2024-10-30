@@ -47,7 +47,7 @@ exports.deleteEvent = async (req, res) => {
  const eventId = req.params.id
  const {userId} = req.session
  //console.log(eventId, userId)
- //const eventParticipants = await EventParticipants.deleteAllFromEvent(userId)
+ // const eventParticipants = await EventParticipants.deleteAllFromEvent(eventId)
  const event = await Event.delete(eventId, userId);
  res.send(event);
 };

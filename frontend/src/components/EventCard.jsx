@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { getEvent } from '../adapters/event-adapter';
 
 const EventCard = ({ event }) => {
   const navigate = useNavigate();

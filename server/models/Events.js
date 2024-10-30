@@ -90,12 +90,17 @@ class Event {
   if(!userId){
    throw new Error('Invalid userId ');
  }
+ console.log(eventId,userId)
    try{
     await knex('event_participants').where('event_id', eventId).del()
     const query = `DELETE FROM run_events WHERE id = ? AND event_created_by=? 
      RETURNING *`;
-    const {rows:[eventData]} = await knex.raw(query, [eventId, userId]);
-    return eventData
+    const result = await knex.raw(query, [eventId, userId]);
+    if (result.rowCount === 0) {
+     throw new Error("Event not found or unauthorized deletion attempt");
+   }
+   return result.rows[0];
+  
    } catch (error){
     throw new Error(`Unable to delete event: ${error.message}`)
    }

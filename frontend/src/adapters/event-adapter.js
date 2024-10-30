@@ -46,3 +46,4 @@ export const updateEvent = async ({ name, date, starting_point, ending_point, de
 export const deleteEvent = async (id) => {
   return fetchHandler(`${baseUrl}/${id}`, { method: 'DELETE' });
 };
+
