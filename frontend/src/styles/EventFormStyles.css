@@ -1,0 +1,57 @@
+.form {
+ border:  3px solid  #1E0A0A;
+ border-radius: 7px;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ padding:10px;
+ font-style: italic;
+ width: 350px;
+ color: #D9D9D9;
+ z-index: 10px; 
+}
+
+.title {
+ font-size: large;
+ margin-top: 5px;
+}
+
+.button {
+ background-color: #D9D9D9;
+ color: #2A0C3E;
+ border: 3px solid #2A0C3E;
+ border-radius: 7px;
+ width: 175px;
+ height: 100px;
+ cursor: pointer; 
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+ margin: 10px;
+ font-size: medium;
+}
+
+.input-box {
+ margin-top: 5px;
+ background-color: #D9D9D9;
+ color: #2A0C3E;
+ border: 3px solid #2A0C3E;
+ border-radius: 7px;
+ width: 275px;
+ height: 75px;
+ cursor: text;
+}
+
+.text-area {
+ background-color: #D9D9D9;
+ color: #2A0C3E;
+ border: 3px solid #2A0C3E;
+ border-radius: 7px;
+ width: 275px;
+ height: 125px;
+ cursor: text;
+}
+
+.input-box::placeholder {
+ color: #2A0C3E;   
+ background-color: #D9D9D9;
+ font-size: medium;           
+ font-style: italic;       
+ opacity: 0.7;             
+}

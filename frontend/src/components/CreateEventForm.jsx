@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { EventContext } from '../contexts/EventContext';
 import { createEvent } from '../adapters/event-adapter';
+import '../styles/EventFormStyles.css'
 
 const CreateEventForm = () => {
   const { addEvent } = useContext(EventContext);
@@ -37,11 +38,11 @@ const CreateEventForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='form' onSubmit={handleSubmit}>
       {/* reach out to Mekhi about Cloudinary for pic? */}
       <div>
-        <label htmlFor="event-name">Event Name:</label>
-        <input
+        <label className='title' htmlFor="event-name">Event Name:</label>
+        <input className='input-box'
           type="text"
           id="event-name"
           name="name"
@@ -50,8 +51,8 @@ const CreateEventForm = () => {
         />
       </div>
       <div>
-        <label htmlFor="event-time">Event Start Time:</label>
-        <input
+        <label className='title'htmlFor="event-time">Event Start Time:</label>
+        <input className='input-box'
           type="time"
           id="event-time"
           name="time"
@@ -60,8 +61,8 @@ const CreateEventForm = () => {
         />
       </div>
       <div>
-        <label htmlFor="event-date">Event Date:</label>
-        <input
+        <label className='title'htmlFor="event-date">Event Date:</label>
+        <input className='input-box'
           type="date"
           id="event-date"
           name="date"
@@ -74,8 +75,8 @@ const CreateEventForm = () => {
           distance?
       */}
       <div>
-        <label htmlFor="start-address">Starting Address:</label>
-        <input
+        <label className='title'htmlFor="start-address">Starting Address:</label>
+        <input className='input-box'
           type="text"
           id="start-address"
           name="starting_point"
@@ -85,8 +86,8 @@ const CreateEventForm = () => {
         />
       </div>
       <div>
-        <label htmlFor="end-address">Ending Address:</label>
-        <input
+        <label className='title'htmlFor="end-address">Ending Address:</label>
+        <input className='input-box' 
           type="text"
           id="end-address"
           name="ending_point"
@@ -96,8 +97,9 @@ const CreateEventForm = () => {
         />
       </div>
       <div>
-        <label htmlFor="location">Event Location (Borough):</label>
-        <select
+        <label className='title'htmlFor="location">Event Location (Borough):</label>
+        <select 
+          className='button' 
           id="location"
           name="location"
           value={formData.location}
@@ -112,8 +114,8 @@ const CreateEventForm = () => {
         </select>
       </div>
       <div>
-        <label htmlFor="event-description">Event Description:</label>
-        <textarea
+        <label className='title'htmlFor="event-description">Event Description:</label>
+        <textarea className='text-area'
           id="event-description"
           name="description"
           value={formData.description}
@@ -121,8 +123,8 @@ const CreateEventForm = () => {
         ></textarea>
       </div>
       <div>
-        <label htmlFor="max-participants">Max Participants:</label>
-        <input
+        <label className='title'htmlFor="max-participants">Max Participants:</label>
+        <input className='input-box'
           type="number"
           id="max-participants"
           name="max_participants"
@@ -132,7 +134,7 @@ const CreateEventForm = () => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit">Create Event</button>
+      <button className='button' type="submit">Create Event</button>
     </form>
   );
 };

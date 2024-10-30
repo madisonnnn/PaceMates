@@ -39,10 +39,11 @@ export const getEvent = async (id) => {
   return fetchHandler(`${baseUrl}/${id}`);
 }
 
-export const updateEvent = async ({ name, date, starting_point, ending_point, description, max_participants,time,location, eventId,userId }) => {
-  return fetchHandler(`${baseUrl}/${eventId}`, getPatchOptions({  name, date, starting_point, ending_point, description, max_participants,time,location,eventId,userId   }));
+export const updateEvent = async ({ name, date, starting_point, ending_point, description, max_participants,time,location}, id) => {
+  return fetchHandler(`${baseUrl}/${id}`, getPatchOptions({  name, date, starting_point, ending_point, description, max_participants,time,location  }));
 }
 
 export const deleteEvent = async (id) => {
   return fetchHandler(`${baseUrl}/${id}`, { method: 'DELETE' });
 };
+

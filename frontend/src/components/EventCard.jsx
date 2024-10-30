@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { getEvent } from '../adapters/event-adapter';
+import "../styles/EventCardStyles.css"
 
 const EventCard = ({ event }) => {
   const navigate = useNavigate();
@@ -9,12 +9,13 @@ const EventCard = ({ event }) => {
   };
 
   return (
-    <div className="ui card" onClick={handleClick} style={{ margin: '20px' }}>
-      <div className="image">
+    <div className="ui-card" onClick={handleClick} style={{ margin: '20px' }}>
+     
+
+      <div className="content"> 
+        <div className="image">
         <img src={event.imageUrl || 'default-image-url'} />
       </div>
-
-      <div className="content">
         <div className="header">{event.name}</div>
       
         <div className="meta">
@@ -33,15 +34,16 @@ const EventCard = ({ event }) => {
           <span>
           Location: {event.location}
           </span>
-        </div>
-      </div>
-
-      <div className="extra content">
+        </div> 
+        <div className="extra-content">
         <span>
           <i className="fas fa-user" />
           Event created by: {event.id}
         </span>
       </div>
+      </div>
+
+     
     </div>
   );
 };
