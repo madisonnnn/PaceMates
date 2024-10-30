@@ -1,6 +1,6 @@
 .homepage {
-  font-family: Arial, sans-serif;
-  color: #333;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #D9D9D9;
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
@@ -8,31 +8,37 @@
 
 .hero {
   text-align: center;
-  background-color: #f8f9fa;
+  background-color: #D9D9D9;
+  border: 3px #2A0C3E solid;
+  border-radius: 7px;
+  color: #2A0C3E;
   padding: 50px 20px;
+ 
 }
 
 .hero h1 {
   font-size: 2.5rem;
+  color: #2A0C3E;
 }
 
 .hero p {
   font-size: 1.2rem;
-  margin: 20px 0;
+  margin: 20px 0; 
+  color: #1E0A0A;
 }
 
 .cta-button {
-  background-color: #007bff;
-  color: white;
+  background-color: #1F2C56;
+  color: #D9D9D9;
   padding: 15px 30px;
-  border: none;
+  border: 3px #D9D9D9 solid;
   font-size: 1rem;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 7px;
 }
 
 .cta-button:hover {
-  background-color: #0056b3;
+  background-color: #2A0C3E;
 }
 
 .problem, .solution, .statistics, .how-it-works, .testimonials, .final-cta {
@@ -53,5 +59,5 @@ blockquote {
   font-style: italic;
   margin: 20px 0;
   padding-left: 20px;
-  border-left: 3px solid #007bff;
+  border-left: 3px solid #1E0A0A;
 }

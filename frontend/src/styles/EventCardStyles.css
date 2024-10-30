@@ -1,0 +1,68 @@
+.event-list {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.ui-card {
+ background-color: #D9D9D9;
+ border: 3px #2A0C3E solid;
+ border-radius: 7px;
+ display: flex;
+ flex-direction: column;
+ flex-wrap: wrap;
+ width: 500px;
+ height: 350px;
+}
+
+
+.content {
+ display: flex;
+ flex-direction: column;
+ flex-wrap: wrap;
+
+}
+
+.image{
+width: 100px;
+height: 100px;
+border: 3px #2A0C3E, solid;
+border-radius: 7px;
+}
+
+.header {
+ color: #2A0C3E;
+ font-size:x-large;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ font-style: italic;
+ margin: 10px;
+}
+
+.meta {
+ color: #2A0C3E;
+ font-size: medium;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ margin: 10px;
+}
+
+.description {
+ color: #2A0C3E;
+ font-size: medium;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ margin: 10px;
+}
+
+.location {
+ color: #2A0C3E;
+ font-size: medium;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ margin: 10px;
+}
+
+.extra-content {
+ color: #2A0C3E;
+ font-size: medium;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ margin: 10px;
+}
+

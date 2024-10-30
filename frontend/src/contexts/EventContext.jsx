@@ -6,6 +6,7 @@ export const EventProvider = ({ children }) => {
   const [eventList, setEventList] = useState([]);
   const [eventDetails, setEventDetails] = useState(null);
 
+
   const addEvent = (event) => {
     setEventList((prevEvents) => [...prevEvents, event]);
   };
@@ -15,6 +16,8 @@ export const EventProvider = ({ children }) => {
     setEventList((prevEvents) =>  prevEvents.filter((event) => event !== eventToDelete)) : 
     console.log('Cannot delete this event.')
   };
+
+
 
   return (
     <EventContext.Provider value={{ eventList, eventDetails, setEventDetails, addEvent, removeEvent }}>

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { ParticipantContext } from '../contexts/ParticipantContext';
 import { signUp, optOut } from '../adapters/event-participant-adapter';
+import '../styles/EventDetailsStyles.css'
 
 
 const EventSignUp = () => {
@@ -36,10 +37,10 @@ const optOutOfEvent = async () => {
   
   return (
     <div className="event-button">
-      <button onClick={signUpForEvent}>
+      <button className='button'onClick={signUpForEvent}>
        Sign Up For Event!
       </button>
-      <button onClick={optOutOfEvent}>
+      <button className='button'onClick={optOutOfEvent}>
        Opt Out Of Event!
       </button>
     </div>

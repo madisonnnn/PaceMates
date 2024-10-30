@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react';
 import EventCard from './EventCard';
 import { getAllEvents } from '../adapters/event-adapter';
+import "../styles/EventCardStyles.css"
 
 const EventList = ({filteredEvents}) => {
   const [eventList, setEventList] = useState([]);

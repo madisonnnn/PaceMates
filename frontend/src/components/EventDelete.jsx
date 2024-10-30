@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { EventContext } from '../contexts/EventContext';
 import { deleteEvent } from '../adapters/event-adapter';
+import '../styles/EventDetailsStyles.css'
 
 
 const EventDelete = () => {
@@ -27,7 +28,7 @@ const deleteTheEvent = async () => {
   
   return (
     <div className="event-button">
-      <button onClick={deleteTheEvent}>
+      <button className='button' onClick={deleteTheEvent}>
        Delete Event!
       </button>
     </div>

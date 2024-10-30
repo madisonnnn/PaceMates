@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react';
 import { getAllParticipants } from '../adapters/event-participant-adapter';
 import { useParams } from 'react-router-dom';
+import '../styles/ParticipantListStyles.css'
 
 const ParticipantList = () => {
   const [participantList, setParticipantList] = useState([]);
@@ -10,15 +11,15 @@ const ParticipantList = () => {
   }, [participantList]);
 
   return (
-    <div>
+    <div >
       {participantList.length > 0 ? (
-        <ul>
+        <div className='list'>
           {participantList.map(participant => (
-            <li key={participant.user_id}>{participant.first_name} {participant.last_name}</li>
+            <p className='list-item' key={participant.user_id}>{participant.first_name} {participant.last_name}</p>
           ))}
-        </ul>
+        </div>
       ) : (
-        <p>No participants are currently attending.</p>
+        <p className='no-list'>No participants are currently attending.</p>
       )}
     </div>
   );
