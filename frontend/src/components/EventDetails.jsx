@@ -86,7 +86,7 @@ const EventDetails = () => {
         {showForm ? 'Close Form' : 'Update Event'}
       </button>
 
-      {showForm && <EventUpdate currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} className='button'/>}
+      {showForm && <EventUpdate currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />}
       </div>
     </div>
   );
