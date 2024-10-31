@@ -4,9 +4,6 @@
  */
 exports.up = (knex) => {
   return knex.schema.createTable('users', (table) => {
-    table.dropColumn('username');
-    table.dropColumn('created_at');
-    table.dropColumn('updated_at');
     table.increments();
     table.string('password_hash').notNullable();
     table.string('first_name').notNullable();
