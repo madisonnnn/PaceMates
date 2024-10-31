@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import QuoteContext from "../contexts/QuotesContext";
+import "../styles/QuoteDisplay.css"
 
-//creating the function quotes display
 const QuoteDisplay = () => {
 
     const { quote, error } = useContext(QuoteContext);

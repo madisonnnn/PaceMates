@@ -15,6 +15,3 @@ export const getAllParticipants = async (id) => {
   if (error) console.log(error); 
   return participants || [];
 };
-
-
-

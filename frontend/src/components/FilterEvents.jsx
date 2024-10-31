@@ -39,7 +39,7 @@ export default function FilterEvents ({onFilter}) {
         <input
           type="range"
           min="1"
-          max="15"
+          max="10"
           value={distance}
           onChange={(e) => setDistance(e.target.value)}
         />

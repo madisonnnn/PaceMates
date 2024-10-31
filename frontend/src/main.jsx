@@ -8,10 +8,10 @@ import './styles/index.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <QuoteProvider>
     <UserContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </UserContextProvider>
+      <BrowserRouter>
+        <App />
+     </BrowserRouter>
+    </UserContextProvider>
   </QuoteProvider>
   
 );

@@ -5,8 +5,7 @@ const User = require('../../models/User');
  */
 exports.seed = async (knex) => {
   // Before you have models you can always just do `await knex('table_name').del`
-    
-    
+
     await knex('event_participants').del()
     await knex('run_events').del()
     await knex('users').del();
@@ -21,8 +20,8 @@ exports.seed = async (knex) => {
   ])
   const [user] = await knex('users').select('id').limit(1)
   await knex('run_events').insert([
-    { name: 'andy',date: 'tmrw',event_created_by: user.id, starting_point: 'marcy', ending_point: 'train',description:'fun run', distance: 3.3,max_participants:'14',time:'11',location:'manhattan'},
-  ])
+    { name: 'andy', date: '10/10/2024', time: '12:00 PM', location: 'Brooklyn', event_created_by: user.id, starting_point: 'marcy', ending_point: 'train', description: 'fun run', distance: 3.3, max_participants: 14 },
+  ]);
 
   const [event] = await knex('run_events').select('id').limit(1)
   await knex('event_participants').insert([

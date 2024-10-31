@@ -7,6 +7,8 @@ exports.up = async function(knex) {
   table.increments('id')
   table.string('name').notNullable()
   table.string('date').notNullable()
+  table.string('time').notNullable()
+  table.string('location').notNullable()
   table.integer('event_created_by').unsigned().notNullable()
   table.string('starting_point').notNullable()
   table.string('ending_point').notNullable()
@@ -32,5 +34,6 @@ exports.up = async function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
- return knex.schema.dropTable('run_events').dropTable('event_participants')
+ return knex.schema.dropTable('event_participants').dropTable('run_events')
 };
+

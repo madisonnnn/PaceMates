@@ -32,6 +32,7 @@ export default function App() {
               <Route path='/events/:id' element={<EventDetails />} /> 
               <Route path='/login' element={<LoginPage />} />
               <Route path='/sign-up' element={<SignUpPage />} />
+              {/* want profile to hit the id, users is irrelevant? */}
               <Route path='/users' element={<UsersPage />} />
               <Route path='/users/:id' element={<UserPage />} />
               <Route path='*' element={<NotFoundPage />} />
