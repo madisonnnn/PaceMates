@@ -1,7 +1,9 @@
-import { useState, useContext, useRef, useEffect } from 'react';
+
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import { EventContext } from '../contexts/EventContext';
 import { createEvent } from '../adapters/event-adapter';
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import "../styles/CreateEventForm.css";
 
 const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
@@ -11,7 +13,6 @@ const CreateEventForm = () => {
     name: '',
     date: '',
     time: '',
-    distance: '',
     starting_point: '',
     ending_point: '',
     location: '',
@@ -89,7 +90,6 @@ const CreateEventForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting event with data:", { ...formData, distance });
     try {
       const [newEvent, error] = await createEvent({ ...formData, distance });
       if (newEvent) {
@@ -113,119 +113,73 @@ const CreateEventForm = () => {
     }
   };
 
-  const formatTime = (time) => {
-    const [hours, minutes] = time.split(':');
-    const formattedHours = hours % 12 || 12; 
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    return `${formattedHours}:${minutes} ${ampm}`;
-  };
-
   return (
     <LoadScript googleMapsApiKey={googleMapsApiKey} libraries={libraries}>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="event-name">Event Name:</label>
-          <input
-            type="text"
-            id="event-name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="event-time">Event Start Time:</label>
-          <input
-            type="time"
-            id="event-time"
-            name="time"
-            value={formData.time}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="event-date">Event Date:</label>
-          <input
-            type="text" 
-            id="event-date"
-            name="date"
-            placeholder="MM/DD/YY" 
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="start-address">Starting Address:</label>
-          <input
-            type="text"
-            id="start-address"
-            name="starting_point"
-            placeholder="Enter starting point"
-            value={formData.starting_point}
-            ref={(ref) => {
+      <div className="form-map-container">
+        <form onSubmit={handleSubmit} className="form-container">
+          <div>
+            <label htmlFor="event-name">Event Name:</label>
+            <input type="text" id="event-name" name="name" value={formData.name} onChange={handleChange} />
+          </div>
+          <div>
+            <label htmlFor="event-time">Event Start Time:</label>
+            <input type="time" id="event-time" name="time" value={formData.time} onChange={handleChange} required />
+          </div>
+          <div>
+            <label htmlFor="event-date">Event Date:</label>
+            <input type="text" id="event-date" name="date" placeholder="MM/DD/YY" value={formData.date} onChange={handleChange} required />
+          </div>
+          <div>
+            <label htmlFor="start-address">Starting Address:</label>
+            <input type="text" id="start-address" name="starting_point" placeholder="Enter starting point" value={formData.starting_point} ref={(ref) => {
               if (ref && !autocompleteStartRef.current) {
                 autocompleteStartRef.current = new window.google.maps.places.Autocomplete(ref);
                 autocompleteStartRef.current.addListener("place_changed", () => handlePlaceChanged("start"));
               }
-            }}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="end-address">Ending Address:</label>
-          <input
-            type="text"
-            id="end-address"
-            name="ending_point"
-            placeholder="Enter ending point"
-            value={formData.ending_point}
-            ref={(ref) => {
+            }} onChange={handleChange} />
+          </div>
+          <div>
+            <label htmlFor="end-address">Ending Address:</label>
+            <input type="text" id="end-address" name="ending_point" placeholder="Enter ending point" value={formData.ending_point} ref={(ref) => {
               if (ref && !autocompleteEndRef.current) {
                 autocompleteEndRef.current = new window.google.maps.places.Autocomplete(ref);
                 autocompleteEndRef.current.addListener("place_changed", () => handlePlaceChanged("end"));
               }
-            }}
-            onChange={handleChange}
-          />
-        </div>
-        <p>Distance: {isCalculating ? "Calculating..." : distance}</p>
-        <div>
-          <label htmlFor="location">Event Location (Borough):</label>
-          <select id="location" name="location" value={formData.location} onChange={handleChange}>
-            <option value="">Select a Borough</option>
-            <option value="Manhattan">Manhattan</option>
-            <option value="Brooklyn">Brooklyn</option>
-            <option value="Queens">Queens</option>
-            <option value="Bronx">Bronx</option>
-            <option value="Staten Island">Staten Island</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="event-description">Event Description:</label>
-          <textarea id="event-description" name="description" value={formData.description} onChange={handleChange}></textarea>
-        </div>
-        <div>
-          <label htmlFor="max-participants">Max Participants:</label>
-          <input
-            type="number"
-            id="max-participants"
-            name="max_participants"
-            min="1"
-            value={formData.max_participants}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Create Event</button>
-      </form>
+            }} onChange={handleChange} />
+          </div>
+          <p>Distance: {isCalculating ? "Calculating..." : distance}</p>
+          <div>
+            <label htmlFor="location">Event Location (Borough):</label>
+            <select id="location" name="location" value={formData.location} onChange={handleChange}>
+              <option value="">Select a Borough</option>
+              <option value="Manhattan">Manhattan</option>
+              <option value="Brooklyn">Brooklyn</option>
+              <option value="Queens">Queens</option>
+              <option value="Bronx">Bronx</option>
+              <option value="Staten Island">Staten Island</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="event-description">Event Description:</label>
+            <textarea id="event-description" name="description" value={formData.description} onChange={handleChange}></textarea>
+          </div>
+          <div>
+            <label htmlFor="max-participants">Max Participants:</label>
+            <input type="number" id="max-participants" name="max_participants" min="1" value={formData.max_participants} onChange={handleChange} />
+          </div>
+          <button type="submit">Create Event</button>
+        </form>
 
-      <GoogleMap mapContainerStyle={{ width: "100%", height: "400px" }} center={startCoords || { lat: 40.7128, lng: -74.006 }} zoom={10}>
-        {startCoords && <Marker position={startCoords} />}
-        {endCoords && <Marker position={endCoords} />}
-      </GoogleMap>
+        <div className="map-container">
+          <GoogleMap mapContainerStyle={{ width: '100%', height: '100%' }} center={startCoords || { lat: 40.7128, lng: -74.0060 }} zoom={13}>
+            {startCoords && <Marker position={startCoords} />}
+            {endCoords && <Marker position={endCoords} />}
+          </GoogleMap>
+        </div>
+      </div>
     </LoadScript>
   );
 };
 
 export default CreateEventForm;
+

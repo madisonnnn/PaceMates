@@ -15,7 +15,7 @@ export default function FilterEvents ({ onFilterChange }) {
       <div className="filter-item">
         <label>Location:</label>
         <select value={location} onChange={(e) => setLocation(e.target.value)}>
-          <option value="">Select a borough</option>
+          <option value="">Select a Borough</option>
           <option value="manhattan">Manhattan</option>
           <option value="brooklyn">Brooklyn</option>
           <option value="queens">Queens</option>
@@ -28,7 +28,7 @@ export default function FilterEvents ({ onFilterChange }) {
         <input
           type="range"
           min="1"
-          max="15"
+          max="10"
           value={distance}
           onChange={(e) => setDistance(e.target.value)}
         />

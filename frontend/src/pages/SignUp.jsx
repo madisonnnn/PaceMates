@@ -32,6 +32,27 @@ export default function SignUpPage() {
     navigate('/');
   };
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   setErrorText('');
+  //   // Check for missing fields
+  //   if (!firstName || !lastName || !password) {
+  //     return setErrorText('Missing first name, last name, or password');
+  //   }
+  
+  //   // Include first_name and last_name in the payload
+  //   const [user, error] = await createUser({
+  //     first_name: firstName,
+  //     last_name: lastName,
+  //     email,
+  //     password,
+  //   });
+
+  //   setCurrentUser(user);
+  //   navigate('/');
+  // };
+
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === 'firstName') setFirstName(value);

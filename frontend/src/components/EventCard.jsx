@@ -69,7 +69,13 @@ const EventCard = ({ event }) => {
       
         <div className="meta">
           <span>
-            Time: {formatTime(event.time)} on {event.date} 
+            Time: {formatTime(event.time)} 
+          </span>
+        </div>
+
+        <div className="meta">
+          <span>
+            Date: {event.date} 
           </span>
         </div>
 
@@ -91,12 +97,6 @@ const EventCard = ({ event }) => {
           <i className="fas fa-user" />
           {/* change this to name of creator of event */}
           Event created by: {event.id}
-        </span>
-      </div>
-
-      <div className="remaining spots">
-        <span>
-          Remaining Spots: {event.id}
         </span>
       </div>
     </div>

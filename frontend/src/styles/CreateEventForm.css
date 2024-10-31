@@ -1,0 +1,66 @@
+.form-map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; 
+  padding: 20px;
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
+
+.form-container {
+  flex: 1;
+  max-width: 300px; 
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-container input,
+.form-container select,
+.form-container textarea {
+  width: 95%; 
+  padding: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-container textarea {
+  resize: vertical;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.form-container button:hover {
+  background-color: #45a049;
+}
+
+.map-container {
+  flex: 2;
+  max-width: 650px; 
+  height: 400px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  align-self: center; 
+}

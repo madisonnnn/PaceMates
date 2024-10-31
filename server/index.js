@@ -79,6 +79,8 @@ app.get('*', (req, res, next) => {
 ///////////////////////////////
 
 const port = process.env.PORT || 3000;
+// console.log("Google Maps API Key:", process.env.GOOGLE_MAPS_API_KEY);
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });

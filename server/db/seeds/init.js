@@ -5,8 +5,6 @@ const User = require('../../models/User');
  */
 exports.seed = async (knex) => {
   // Before you have models you can always just do `await knex('table_name').del`
-    
-  // include time and location 
 
     await knex('event_participants').del()
     await knex('run_events').del()
