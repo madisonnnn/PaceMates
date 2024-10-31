@@ -46,7 +46,7 @@
 // export default EventCard;
 
 import { useNavigate } from 'react-router-dom';
-import { getEvent } from '../adapters/event-adapter';
+import "../styles/EventCardStyles.css"
 
 const formatTime = (time) => {
   const [hour, minute] = time.split(':'); 
@@ -89,16 +89,17 @@ const EventCard = ({ event }) => {
           <span>
             Location: {event.location}
           </span>
-        </div>
-      </div>
-
-      <div className="extra content">
+        </div> 
+        <div className="extra-content">
         <span>
           <i className="fas fa-user" />
           {/* change this to name of creator of event */}
           Event created by: {event.id}
         </span>
       </div>
+      </div>
+
+     
     </div>
   );
 };

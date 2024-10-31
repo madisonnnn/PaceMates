@@ -23,9 +23,9 @@ export default function SignUpPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorText('');
-    if (!username || !password) return setErrorText('Missing username or password');
+    if (!firstName || !lastName || !email || !password) return setErrorText('Missing username or password');
 
-    const [user, error] = await createUser({ username, password });
+    const [user, error] = await createUser({ firstName,lastName,email, password });
     if (error) return setErrorText(error.message);
 
     setCurrentUser(user);

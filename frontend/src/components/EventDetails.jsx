@@ -123,13 +123,21 @@
 // export default EventDetails;
 
 
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; 
-import { getEvent } from '../adapters/event-adapter';
+// import { useEffect, useState } from 'react';
+// import { useParams, useNavigate } from 'react-router-dom'; 
+// import { getEvent } from '../adapters/event-adapter';
 import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer } from "@react-google-maps/api";
 import "../styles/EventDetails.css";
 
 const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+import { useEffect, useState } from 'react';
+import { useParams,useNavigate } from 'react-router-dom';
+import { getEvent } from '../adapters/event-adapter';
+import EventSignUp from './EventSignUp';
+import ParticipantList from './ParticipantList';
+import EventDelete from './EventDelete';
+import EventUpdate from './EventUpdate';
+// import '../styles/EventDetailsStyles.css'
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -139,6 +147,14 @@ const EventDetails = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false); 
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const navigate = useNavigate(); 
+  const [showForm, setShowForm] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState(null)
+
+  const handleUpdateEventClick = () => {
+    setShowForm(!showForm);
+  }
+  // const [isAuthenticated, setIsAuthenticated] = useState(false); // State for user authentication status
+  // const navigate = useNavigate(); // for redirection
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -214,40 +230,98 @@ const EventDetails = () => {
   if (loading) return <p>Loading event details...</p>;
   if (error) return <p>{error}</p>;
 
+
+
+
   return (
-    <div className="event-details-container">
-      <div className="map-container">
+    // figure out what makes more sense to have in the card vs here
+    // think max needs to be in card
+    <div className="event-details">
+      <div className='info'>
+      {/* Map */}
+      <div className='card' id='card-one'>
         <LoadScript googleMapsApiKey={googleMapsApiKey}>
-          <GoogleMap 
-            mapContainerStyle={{ width: "100%", height: "400px" }} 
-            center={{ lat: 40.7128, lng: -74.0060 }} 
-            zoom={10}
-          >
-            {directionsResponse && (
-              <DirectionsRenderer directions={directionsResponse} />
-            )}
-          </GoogleMap>
-        </LoadScript>
-      </div>
-      <div className="event-info">
-        <h2>{event.name}</h2>
+            <GoogleMap 
+              mapContainerStyle={{ width: "100%", height: "400px" }} 
+              center={{ lat: 40.7128, lng: -74.0060 }} 
+              zoom={10}
+            >
+              {directionsResponse && (
+                <DirectionsRenderer directions={directionsResponse} />
+              )}
+            </GoogleMap>
+          </LoadScript>
         <p>Start Address: {event.starting_point}</p>
         <p>End Address: {event.ending_point}</p>
-        <p>Distance: {event.distance || 'Distance not available'} miles</p>
-        <p>Location: {event.location}</p>
-        <p>Date: {event.date}</p>
-        <p>Time: {formatTime(event.time)}</p> 
-        <p>Description: {event.description}</p>
-        <p>Max Participants: {event.max_participants}</p>
-        <button onClick={handleJoinEvent}>
-          {isAuthenticated ? 'Join Event' : 'Login to Join'}
-        </button>
+        <p>Distance: {event.distance}</p>
+      </div>
+      <div className='card' id='card-two'>
+         <h2>{event.name}</h2>
+      <p>Location: {event.location}</p>
+      <p>Date: {event.date}</p>
+      <p>Time: {event.time}</p>
+      {/* dropdown somehow? */}
+      <p>Attending: <ParticipantList/>
+      </p>
+      <p>Description: {event.description}</p>
+      {/* move to card? nice to have like 10/15 */}
+      <p>Max Participants: {event.max_participants}</p>
+      {/* button to "attend" */}
+      <EventSignUp className='button'/>
+      </div>
+      {/* if user who created, button to edit and delete */}
+      <EventDelete className='button'/>
+      </div>
+     <div>
+      <h1> Update Event</h1>
+      <button className='button' onClick={handleUpdateEventClick}>
+        {showForm ? 'Close Form' : 'Update Event'}
+      </button>
+      {showForm && <EventUpdate currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />}
       </div>
     </div>
   );
 };
-
 export default EventDetails;
+
+
+
+
+
+//   return (
+//     <div className="event-details-container">
+//       <div className="map-container">
+//         <LoadScript googleMapsApiKey={googleMapsApiKey}>
+//           <GoogleMap 
+//             mapContainerStyle={{ width: "100%", height: "400px" }} 
+//             center={{ lat: 40.7128, lng: -74.0060 }} 
+//             zoom={10}
+//           >
+//             {directionsResponse && (
+//               <DirectionsRenderer directions={directionsResponse} />
+//             )}
+//           </GoogleMap>
+//         </LoadScript>
+//       </div>
+//       <div className="event-info">
+//         <h2>{event.name}</h2>
+//         <p>Start Address: {event.starting_point}</p>
+//         <p>End Address: {event.ending_point}</p>
+//         <p>Distance: {event.distance || 'Distance not available'} miles</p>
+//         <p>Location: {event.location}</p>
+//         <p>Date: {event.date}</p>
+//         <p>Time: {formatTime(event.time)}</p> 
+//         <p>Description: {event.description}</p>
+//         <p>Max Participants: {event.max_participants}</p>
+//         <button onClick={handleJoinEvent}>
+//           {isAuthenticated ? 'Join Event' : 'Login to Join'}
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }; 
+
+// export default EventDetails;
 
 
 

@@ -51,24 +51,24 @@ class Event {
 
   // Updates the event that matches the given id with new data.
   // Returns the modified event
-  static async update(name, date, time, location, starting_point, ending_point, description, distance, max_participants, eventId, userId) {
+  static async update(name, date,starting_point, ending_point,description, distance,max_participants,time, location, eventId, userId) {
    try {
     const query = `
       UPDATE run_events
       SET name=?,
        date=?,
-       time=?,
-       location=?,
        starting_point=?,
        ending_point=?,
        description=?,
        distance=?,
-       max_participants=?
+       max_participants=?,
+       time=?,
+       location=?
       WHERE id=? AND event_created_by = ?
       RETURNING *
-    `;
-    const {rows:[eventData]} = await knex.raw(query, [name, date, time, location, starting_point, ending_point, description, distance, max_participants, eventId, userId])
-    return eventData; 
+    `
+    const {rows:[eventData]} = await knex.raw(query, [name, date,starting_point, ending_point,description, distance,max_participants,time,location,eventId,userId])
+    return eventData 
    }  catch (error){
     throw new Error(`Unable to update event: ${error.message}`)
    } 
@@ -90,18 +90,23 @@ class Event {
   if(!userId){
    throw new Error('Invalid userId ');
  }
+ console.log(eventId,userId)
    try{
     await knex('event_participants').where('event_id', eventId).del()
     const query = `DELETE FROM run_events WHERE id = ? AND event_created_by=? 
      RETURNING *`;
-    const {rows:[eventData]} = await knex.raw(query, [eventId, userId]);
-    return eventData
+    const result = await knex.raw(query, [eventId, userId]);
+    if (result.rowCount === 0) {
+     throw new Error("Event not found or unauthorized deletion attempt");
+   }
+   return result.rows[0];
+  
    } catch (error){
     throw new Error(`Unable to delete event: ${error.message}`)
    }
   }
 
-  static async filter(size, distance, date){
+  static async filter(size,distance,location){
    const arr = [] 
    let query = `SELECT * FROM run_events`;
 
@@ -119,9 +124,9 @@ class Event {
      whereClause = true;
     }
 
-    if(date) {
-     query += whereClause ? ` AND date = ?` : ` WHERE date = ?`;
-     arr.push(date);
+    if(location) {
+     query += whereClause ? ` AND location = ?` : ` WHERE location = ?`;
+     arr.push(location);
      }
 
     const {rows} = await knex.raw(query, arr);

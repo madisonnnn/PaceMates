@@ -6,6 +6,7 @@ import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import "../styles/CreateEventForm.css";
 
 const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+// import '../styles/EventFormStyles.css'
 
 const CreateEventForm = () => {
   const { addEvent } = useContext(EventContext);
@@ -152,11 +153,11 @@ const CreateEventForm = () => {
             <label htmlFor="location">Event Location (Borough):</label>
             <select id="location" name="location" value={formData.location} onChange={handleChange}>
               <option value="">Select a Borough</option>
-              <option value="Manhattan">Manhattan</option>
-              <option value="Brooklyn">Brooklyn</option>
-              <option value="Queens">Queens</option>
-              <option value="Bronx">Bronx</option>
-              <option value="Staten Island">Staten Island</option>
+              <option value="manhattan">Manhattan</option>
+              <option value="brooklyn">Brooklyn</option>
+              <option value="queens">Queens</option>
+              <option value="bronx">Bronx</option>
+              <option value="staten island">Staten Island</option>
             </select>
           </div>
           <div>
