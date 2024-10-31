@@ -2,13 +2,23 @@ import { useNavigate, useParams } from "react-router-dom";
 import { updateEvent } from "../adapters/event-adapter";
 import { useState, useEffect } from "react";
 import { getEvent } from "../adapters/event-adapter";
-import '../styles/EventFormStyles.css'
+import '../styles/EventUpdateStyles.css'
 
 export default function EventUpdate() {
  const navigate = useNavigate();
  const [currentEvent, setCurrentEvent] = useState(null);
-  const { id } = useParams();
-
+ const { id } = useParams();
+ const [formData, setFormData] = useState({
+  name: '',
+  date: '',
+  time: '',
+  starting_point: '',
+  ending_point: '',
+  location: '',
+  description: '',
+  max_participants: '',
+ });
+ 
   useEffect(() => {
     getEvent(parseInt(id)).then((event)=> {
      setCurrentEvent(event)
@@ -24,18 +34,9 @@ export default function EventUpdate() {
     });
     console.log(event)
     })
-  }, [setFormData]);
+  }, [id]);
 
- const [formData, setFormData] = useState({
-  name: '',
-  date: '',
-  time: '',
-  starting_point: '',
-  ending_point: '',
-  location: '',
-  description: '',
-  max_participants: '',
-});
+ 
 
  const handleSubmit = async (event) => {
    event.preventDefault();
