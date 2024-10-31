@@ -1,99 +1,41 @@
-// import { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { getEvent } from '../adapters/event-adapter';
-
-// const EventDetails = () => {
-//   const { id } = useParams();
-//   const [event, setEvent] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const fetchEvent = async () => {
-//       try {
-//         const [eventData] = await getEvent(parseInt(id))
-//         if (eventData) {
-//           setEvent(eventData)
-//         } else {
-//           setError('Event not found')
-//         }
-//       } catch (error) {
-//         setError('Error fetching event details')
-//       } finally {
-//         setLoading(false)
-//       }
-//     };
-
-//     fetchEvent();
-//   }, [id]);
-
-//   if (loading) {
-//     return <p>Loading event details...</p>;
-//   }
-
-//   if (error) {
-//     return <p>{error}</p>;
-//   }
-//   console.log(event)
-//   return (
-//     // figure out what makes more sense to have in the card vs here
-//     // think max needs to be in card
-//     <div className="event-details">
-//       {/* Map */}
-//       <p>Start Address: {event.starting_point}</p>
-//       <p>End Address: {event.ending_point}</p>
-//       <p>Distance: {event.distance}</p>
-//       <p>Location: {event.location}</p>
-
-//       <h2>{event.title}</h2>
-//       <p>Date: {event.date}</p>
-//       <p>Time: {event.time}</p>
-//       {/* dropdown somehow? */}
-//       <p>Figure out attending</p>
-//       <p>Description: {event.description}</p>
-//       {/* move to card? nice to have like 10/15 */}
-//       <p>Max Participants: {event.max_participants}</p>
-
-//       {/* button to "attend" */}
-
-//       {/* if user who created, button to edit and delete */}
-//     </div>
-//   );
-// };
-
-// export default EventDetails;
-
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // import useNavigate to redirect
+import { useParams, useNavigate } from 'react-router-dom'; 
 import { getEvent } from '../adapters/event-adapter';
+import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer } from "@react-google-maps/api";
+
+const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 const EventDetails = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // State for user authentication status
-  const navigate = useNavigate(); // for redirection
+  const [isAuthenticated, setIsAuthenticated] = useState(false); 
+  const [directionsResponse, setDirectionsResponse] = useState(null);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchEvent = async () => {
       try {
         const [eventData] = await getEvent(parseInt(id));
+        console.log("Fetched event data:", eventData); 
         if (eventData) {
           setEvent(eventData);
+          console.log("Calculating route from:", eventData.starting_point, "to:", eventData.ending_point);
+          calculateRoute(eventData.starting_point, eventData.ending_point); 
         } else {
           setError('Event not found');
         }
       } catch (error) {
+        console.error("Error in fetching event:", error); 
         setError('Error fetching event details');
       } finally {
         setLoading(false);
       }
     };
 
-    // // test: simulate fetching user authentication status
     const checkAuthStatus = () => {
-      const userLoggedIn = true; 
+      const userLoggedIn = false; // Replace with actual authentication logic
       setIsAuthenticated(userLoggedIn);
     };
 
@@ -101,40 +43,75 @@ const EventDetails = () => {
     checkAuthStatus();
   }, [id]);
 
+  const calculateRoute = (start, end) => {
+    if (start && end && window.google) {
+      const directionsService = new window.google.maps.DirectionsService();
+      directionsService.route(
+        {
+          origin: start,
+          destination: end,
+          travelMode: window.google.maps.TravelMode.WALKING,
+        },
+        (result, status) => {
+          if (status === "OK") {
+            setDirectionsResponse(result);
+            const distanceText = result.routes[0].legs[0].distance.text;
+            const distance = parseFloat(distanceText.split(" ")[0]);
+            setEvent((prevEvent) => ({
+              ...prevEvent,
+              distance,
+            }));
+          } else {
+            setError('Could not find directions. Please check the addresses.');
+            console.error("Error fetching directions:", status, result);
+          }
+        }
+      );
+    }
+  };
+
   const handleJoinEvent = () => {
     if (!isAuthenticated) {
       navigate('/login');
     } else {
       alert('You have joined the event!');
-      // increment count of max-participants
-      // update attendee list / other states
     }
   };
 
-  if (loading) {
-    return <p>Loading event details...</p>;
-  }
+  const formatTime = (time) => {
+    const [hour, minute] = time.split(':'); 
+    const formattedHour = hour % 12 || 12;
+    const ampm = hour < 12 ? 'AM' : 'PM'; 
+    return `${formattedHour}:${minute} ${ampm}`;
+  };
 
-  if (error) {
-    return <p>{error}</p>;
-  }
-  console.log(id)
+  if (loading) return <p>Loading event details...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="event-details">
-      {/* Map */}
+      <h2>{event.name}</h2>
       <p>Start Address: {event.starting_point}</p>
       <p>End Address: {event.ending_point}</p>
-      <p>Distance: {event.distance} miles</p>
+      <p>Distance: {event.distance || 'Distance not available'} miles</p>
       <p>Location: {event.location}</p>
-
-      <h2>{event.title}</h2>
       <p>Date: {event.date}</p>
-      <p>Time: {event.time}</p>
+      <p>Time: {formatTime(event.time)}</p> 
       <p>Description: {event.description}</p>
       <p>Max Participants: {event.max_participants}</p>
 
-      {/*  */}
+      <LoadScript googleMapsApiKey={googleMapsApiKey}>
+        <GoogleMap 
+          mapContainerStyle={{ width: "100%", height: "400px" }} 
+          center={{ lat: 40.7128, lng: -74.0060 }} 
+          zoom={10}
+        >
+          {directionsResponse && (
+            <DirectionsRenderer directions={directionsResponse} />
+          )}
+        </GoogleMap>
+      </LoadScript>
+
       <button onClick={handleJoinEvent}>
         {isAuthenticated ? 'Join Event' : 'Login to Join'}
       </button>
@@ -143,4 +120,17 @@ const EventDetails = () => {
 };
 
 export default EventDetails;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
