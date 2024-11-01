@@ -1,0 +1,29 @@
+/* Event card styles */
+.ui.card {
+  transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.ui.card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+/* Content styles within event card */
+.content {
+  padding: 15px; /* Padding inside content area */
+}
+
+.header {
+  font-size: 20px; /* Font size for header */
+  font-weight: 700; /* Bold font */
+  color: #333; /* Dark color */
+  margin-bottom: 10px; /* Space below header */
+}
+
+.meta,
+.description,
+.location {
+  font-size: 14px; /* Smaller font size for additional info */
+  color: #555; /* Medium gray color */
+  margin-bottom: 5px; /* Space below each line */
+}

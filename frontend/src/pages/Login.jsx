@@ -3,6 +3,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { logUserIn } from "../adapters/auth-adapter";
 import CurrentUserContext from "../contexts/current-user-context";
 import { Link } from "react-router-dom";
+import "../styles/LoginPage.css"
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -25,7 +26,6 @@ export default function LoginPage() {
   };
 
   return <>
-    <h1>Login</h1>
     <form onSubmit={handleSubmit} aria-labelledby="login-heading">
       <h2 id='login-heading'>Log in!</h2>
       <label htmlFor="email">Email</label>
