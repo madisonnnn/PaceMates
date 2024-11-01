@@ -1,85 +1,49 @@
-
 .event-details {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 20px;
-    font-family: Arial, sans-serif;
-}
-
-.info {
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .info {
     display: flex;
+    gap: 20px;
     flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.card {
-    background-color: #f9f9f9;
+  }
+  
+  .card {
+    flex: 1;
+    padding: 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 10px;
-    width: 300px;
-    min-height: 350px; /* Minimum height to maintain card size */
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-h2 {
-    font-size: 1.5em;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-p {
-    margin: 5px 0;
-    line-height: 1.6;
-    color: #555;
-}
-
-.button {
-    background-color: #007BFF; /* Bootstrap primary color */
-    color: white;
+    background-color: #f9f9f9;
+  }
+  
+  #card-one, #card-two {
+    min-width: 300px;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  .button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 10px 15px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    text-align: center;
-}
-
-.button:hover {
-    background-color: #0056b3; /* Darker shade for hover */
-}
-
-button:focus {
-    outline: none;
-}
-
-/* Google Map Container */
-.google-map {
-    margin-bottom: 20px;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 100%;
-    max-width: 800px; /* Max width for better viewing */
-}
-
-/* Form Toggle Section */
-.update-event-section {
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  .update-delete-buttons {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
-}
-
-.update-event-section h1 {
-    margin-bottom: 10px;
-}
+    gap: 10px;
+    margin-top: 20px;
+  }
+  

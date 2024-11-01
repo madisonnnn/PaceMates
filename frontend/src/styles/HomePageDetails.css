@@ -25,7 +25,7 @@ body {
 }
 
 .cta-button {
-  background-color: #e94e77; /* Bold pink */
+  background-color: #6c757d; /* Neutral grey */
   color: white;
   border: none;
   border-radius: 5px; /* Rounded corners */
@@ -36,7 +36,7 @@ body {
 }
 
 .cta-button:hover {
-  background-color: #d43a63; /* Darker pink on hover */
+  background-color: #5a6268; /* Slightly darker grey on hover */
 }
 
 .problem, .solution, .statistics, .how-it-works, .testimonials, .final-cta {
@@ -58,14 +58,14 @@ p, ul, ol {
 }
 
 strong {
-  color: #e94e77; /* Emphasized text color */
+  color: #6c757d; /* Neutral grey for emphasized text */
 }
 
 blockquote {
   font-style: italic; /* Italic style for quotes */
   margin: 20px 0;
   padding: 10px;
-  border-left: 4px solid #e94e77; /* Highlight quote */
+  border-left: 4px solid #6c757d; /* Neutral grey for quote border */
   background-color: #f9f9f9; /* Light background for quotes */
 }
 
