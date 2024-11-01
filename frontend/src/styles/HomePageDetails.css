@@ -8,6 +8,7 @@ body {
   max-width: 1200px; /* Responsive max width */
   margin: 0 auto; /* Center the homepage */
   padding: 20px; /* Padding for spacing */
+  background-color: #007BFF;
 }
 
 .hero {
