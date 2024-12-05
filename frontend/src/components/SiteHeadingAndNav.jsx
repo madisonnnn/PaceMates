@@ -19,7 +19,7 @@ export default function SiteHeadingAndNav() {
                 {/* No more home page? */}
               <li><NavLink to='/events'>Events</NavLink></li>
               {/* <li><NavLink to='/users' end={true}>Users</NavLink></li> */}
-              <li><NavLink to={`/users/${currentUser.id}`}>Fix Name {currentUser.firstName} {currentUser.lastName}</NavLink></li>
+              {/* <li><NavLink to={`/users/${currentUser.id}`}>Fix Name {currentUser.firstName} {currentUser.lastName}</NavLink></li> */}
             </>
             : <>
               <li><NavLink to='/events'>Events</NavLink></li>

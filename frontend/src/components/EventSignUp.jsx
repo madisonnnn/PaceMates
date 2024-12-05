@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { ParticipantContext } from '../contexts/ParticipantContext';
 import { signUp, optOut } from '../adapters/event-participant-adapter';
-import '../styles/EventDetailsStyles.css'
+import '../styles/EventSignupStyles.css'
 
 
 const EventSignUp = () => {

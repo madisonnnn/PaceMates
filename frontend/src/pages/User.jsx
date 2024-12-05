@@ -143,19 +143,37 @@ export default function UserPage() {
   if (errorText) return <p>{errorText}</p>;
 
   const profileFirstName = isCurrentUserProfile ? currentUser.first_name : userProfile.first_name;
-  const profileLastName = isCurrentUserProfile ? currentUser.last_name : userProfile.last_name;
+const profileLastName = isCurrentUserProfile ? currentUser.last_name : userProfile.last_name;
 
-  return (
-    <>
-      <h1>User Profile</h1>
-      <p>Name: {profileFirstName} {profileLastName}</p> {/* Display first and last name */}
-      {!!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
-      <p>If the user had any data, here it would be</p>
-      <p>Fake Bio or something</p>
-      {
-        !!isCurrentUserProfile
-        && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
-      }
-    </>
-  );
+return (
+  <>
+    <h1>User Profile</h1>
+    <p>Name: {profileFirstName} {profileLastName}</p> {/* Display first and last name */}
+    {!!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
+    <p>If the user had any data, here it would be</p>
+    <p>Fake Bio or something</p>
+    {
+      !!isCurrentUserProfile
+      && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
+    }
+  </>
+);
+
+
+  // const profileFirstName = isCurrentUserProfile ? currentUser.first_name : userProfile.first_name;
+  // const profileLastName = isCurrentUserProfile ? currentUser.last_name : userProfile.last_name;
+
+  // return (
+  //   <>
+  //     <h1>User Profile</h1>
+  //     <p>Name: {profileFirstName} {profileLastName}</p> {/* Display first and last name */}
+  //     {!!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}
+  //     <p>If the user had any data, here it would be</p>
+  //     <p>Fake Bio or something</p>
+  //     {
+  //       !!isCurrentUserProfile
+  //       && <UpdateUsernameForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
+  //     }
+  //   </>
+  // );
 }

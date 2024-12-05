@@ -1,0 +1,53 @@
+Styles for the events page layout
+.events-page {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between filter and event cards */
+  padding: 20px; /* Padding around the page */
+}
+
+/* Filter component styles */
+.filter-component {
+  flex: 1; /* Take 1 part of the flex container */
+  max-width: 300px; /* Set a maximum width */
+  background-color: #f9f9f9; /* Light background for filter section */
+  padding: 20px; /* Padding inside the filter */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+/* Filter item styles */
+.filter-item {
+  margin-bottom: 15px; /* Space between filter items */
+}
+
+.filter-item label {
+  display: block; /* Block display for labels */
+  margin-bottom: 5px; /* Space below the label */
+}
+
+/* Select and input styles */
+.filter-item select,
+.filter-item input[type="range"] {
+  width: 100%; /* Full width for select and range input */
+  padding: 10px; /* Padding inside the input */
+  border: 1px solid #ccc; /* Border for input fields */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* Button styling */
+.filter-component button {
+  display: block; /* Button takes full width */
+  width: 100%; /* Full width for the button */
+  padding: 12px; /* Padding inside the button */
+  background-color: #4CAF50; /* Green background */
+  color: #ffffff; /* White text */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 18px; /* Font size */
+  font-weight: bold; /* Bold font */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.filter-component button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}

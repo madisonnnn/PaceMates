@@ -172,7 +172,7 @@ const CreateEventForm = () => {
         </form>
 
         <div className="map-container">
-          <GoogleMap mapContainerStyle={{ width: '100%', height: '100%' }} center={startCoords || { lat: 40.7128, lng: -74.0060 }} zoom={13}>
+          <GoogleMap mapContainerStyle={{ width: '100%', height: '100%' }} center={startCoords || { lat: 40.7128, lng: -74.0060 }} zoom={11}>
             {startCoords && <Marker position={startCoords} />}
             {endCoords && <Marker position={endCoords} />}
           </GoogleMap>

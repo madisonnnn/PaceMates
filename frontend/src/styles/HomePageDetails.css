@@ -1,83 +1,85 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7; /* Light background for contrast */
+}
+
 .homepage {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: #D9D9D9;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1200px; /* Responsive max width */
+  margin: 0 auto; /* Center the homepage */
+  padding: 20px; /* Padding for spacing */
+  background-color: #007BFF;
 }
 
 .hero {
+  background-color: #4a90e2; /* Vibrant blue */
+  color: white;
   text-align: center;
-  background-color: #D9D9D9;
-  border: 3px #2A0C3E solid;
-  border-radius: 7px;
-  color: #2A0C3E;
-  padding: 50px 20px;
- 
+  padding: 40px 20px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .hero h1 {
-  font-size: 2.5rem;
-  color: #2A0C3E;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin: 20px 0; 
-  color: #1E0A0A;
-}
-
-.cta-button {
-  background-color: #1F2C56;
-  color: #D9D9D9;
-  padding: 15px 30px;
-  border: 3px #D9D9D9 solid;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 7px;
-}
-
-.cta-button:hover {
-  background-color: #2A0C3E;
-}
-
-.problem, .solution, .statistics, .how-it-works, .testimonials, .final-cta {
-  padding: 40px 20px;
-}
-
-h2 {
-  font-size: 2rem;
+  font-size: 2.5em; /* Larger font size for the hero title */
   margin-bottom: 20px;
 }
 
-ul, ol {
-  margin-left: 20px;
-  font-size: 1.1rem;
+.cta-button {
+  background-color: #6c757d; /* Neutral grey */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  padding: 12px 20px;
+  font-size: 1.2em;
+  cursor: pointer; /* Pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+.cta-button:hover {
+  background-color: #5a6268; /* Slightly darker grey on hover */
+}
+
+.problem, .solution, .statistics, .how-it-works, .testimonials, .final-cta {
+  margin: 40px 0; /* Spacing between sections */
+  padding: 20px;
+  background-color: white; /* White background for readability */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+h2 {
+  color: #4a90e2; /* Consistent color for subheadings */
+  font-size: 2em; /* Slightly larger font for headings */
+  margin-bottom: 20px; /* Spacing below headings */
+}
+
+p, ul, ol {
+  line-height: 1.6; /* Improve readability */
+}
+
+strong {
+  color: #6c757d; /* Neutral grey for emphasized text */
 }
 
 blockquote {
-  font-style: italic;
+  font-style: italic; /* Italic style for quotes */
   margin: 20px 0;
-  padding-left: 20px;
-  border-left: 3px solid #1E0A0A;
+  padding: 10px;
+  border-left: 4px solid #6c757d; /* Neutral grey for quote border */
+  background-color: #f9f9f9; /* Light background for quotes */
 }
 
-.testimonials {
-  padding: 20px; 
-  margin: 20px 0; 
+footer {
+  text-align: center; /* Center footer text */
+  margin-top: 40px; /* Spacing above footer */
+  padding: 20px;
+  background-color: #4a90e2; /* Consistent color with hero */
+  color: white; /* White text for footer */
+  border-radius: 8px; /* Rounded corners */
 }
 
-.testimonials blockquote {
-  border-left: 5px solid #28a745; 
-  padding-left: 20px;
-  font-style: italic; 
-  margin: 20px 0; 
-  color: #333;
+footer a {
+  color: white; /* White text for footer links */
+  text-decoration: underline; /* Underlined footer links */
 }
-

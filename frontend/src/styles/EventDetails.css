@@ -1,93 +1,50 @@
-.event-details-container {
-  display: flex; 
-  justify-content: space-between; 
-  align-items: flex-start;
-  gap: 20px; 
-  padding: 20px; 
-  max-width: 1100px; 
-  margin: 100px auto 0;
-}
-
-.map-container {
-  flex: 1; 
-  max-width: 600px;
-  height: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px; 
-}
-
-.event-info {
-  flex: 1; 
-  max-width: 400px; 
-  padding: 20px;
-  background-color: #f9f9f9; 
-  border-radius: 8px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-}
-
-.ui.card {
-  padding: 15px; 
-  background-color: #fff; 
-  border-radius: 8px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  border: 1px solid #ddd; 
-  margin-bottom: 10px; 
-  transition: transform 0.2s; 
-}
-
-.ui.card:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
-}
-
-.content {
-  padding: 15px; 
-}
-
-.header {
-  font-size: 20px; 
-  font-weight: 700; 
-  color: #333; 
-  margin-bottom: 10px;
-}
-
-.meta,
-.description,
-.location {
-  font-size: 14px; 
-  color: #555; 
-  margin-bottom: 5px; 
-}
-
-.filter-component button,
-.event-info button {
-  display: block; 
-  width: 100%; 
-  padding: 12px; 
-  background-color: #4CAF50; 
-  color: #ffffff; 
-  border: none; 
-  border-radius: 4px; 
-  font-size: 18px; 
-  font-weight: bold; 
-  cursor: pointer; 
-  margin-top: 20px; 
-}
-
-.event-info button:hover,
-.filter-component button:hover {
-  background-color: #45a049;
-}
-
-@media (max-width: 768px) {
-  .event-details-container {
-    flex-direction: column; 
-    padding: 15px; 
+.event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #007BFF;
   }
-
-  .map-container,
-  .event-info {
-    max-width: 100%; 
-    margin-bottom: 20px; 
+  
+  .info {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
   }
-}
+  
+  .card {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  #card-one, #card-two {
+    min-width: 300px;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  .button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  .update-delete-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  

@@ -24,3 +24,4 @@ export const updateProfile = async ({ id, firstName, lastName, email }) => {
   return fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, firstName, lastName, email }))
 }
 
+
