@@ -175,6 +175,12 @@ To support event organizers, the website will include an analytics dashboard tha
 
 ---
 
+## 🎥 Demo Video
+
+(./images/video5270183916.mp4)
+
+---
+
 ## 📒 Sources
 
 * Stevens, Mark, et al. “Better Together: How Group-Based Physical Activity Protects against Depression.” Social Science & Medicine Volume 286, Science Direct, 21 Aug. 2021, www.sciencedirect.com/science/article/pii/S0277953621006699.
