@@ -177,7 +177,7 @@ To support event organizers, the website will include an analytics dashboard tha
 
 ## 🎥 Demo Video
 
-(./images/video5270183916.mp4)
+[Demo Video](./images/video527018.mp4)
 
 ---
 
